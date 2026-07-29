@@ -328,10 +328,10 @@ const Marketplace = () => {
             <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
           </div>
         ) : filteredListings.length === 0 ? (
-          <div className="text-center py-20 glass-panel rounded-3xl border border-white/10">
-            <ShoppingCart size={48} className="mx-auto mb-4 text-blue-400/80" />
-            <h3 className="text-2xl font-bold text-white mb-2">No listings found</h3>
-            <p className="text-slate-200 text-base font-medium mt-2">Be the first to sell a project!</p>
+          <div className="text-center py-20 glass-panel rounded-3xl border border-white/15 shadow-xl">
+            <ShoppingCart size={48} className="mx-auto mb-4 text-blue-400" />
+            <h3 className="text-3xl font-extrabold text-white mb-2">No listings found</h3>
+            <p className="text-white text-base md:text-lg font-medium mt-2 opacity-95">Be the first to sell a project!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

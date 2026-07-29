@@ -67,9 +67,9 @@ const Projects = () => {
       ) : projects.length === 0 ? (
         <div className="flex items-center justify-center py-20">
           <div className="text-center">
-            <Users size={48} className="mx-auto mb-4 text-cyan-400/80" />
-            <p className="text-white text-xl font-bold mb-2">No active rooms yet</p>
-            <p className="text-slate-200 text-sm font-medium mb-6">Create a workspace to start collaborating with other developers in real-time.</p>
+            <Users size={48} className="mx-auto mb-4 text-cyan-400" />
+            <p className="text-white text-2xl font-extrabold mb-2">No active rooms yet</p>
+            <p className="text-white text-base md:text-lg font-medium mb-6 opacity-95">Create a workspace to start collaborating with other developers in real-time.</p>
             {isAuthenticated ? (
               <Link to="/create" className="glass-btn px-6 py-3 text-white inline-flex items-center gap-2 font-bold"><Plus size={18} /> Create the first room</Link>
             ) : (

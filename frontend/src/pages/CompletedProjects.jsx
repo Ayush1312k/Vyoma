@@ -72,7 +72,7 @@ const CompletedProjects = () => {
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
             Hall of Fame<span className="text-green-500">.</span>
           </h1>
-          <p className="text-slate-200 text-lg max-w-2xl mx-auto font-medium">
+          <p className="text-white text-lg md:text-xl max-w-2xl mx-auto font-medium opacity-95">
             Showcasing the most impactful projects built, deployed, and finalized by the Vyoma community.
           </p>
           
@@ -106,10 +106,10 @@ const CompletedProjects = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
           </div>
         ) : projects.length === 0 ? (
-          <div className="text-center py-20 glass-panel rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            <Code2 size={56} className="mx-auto mb-6 text-green-400/90" />
-            <h3 className="text-3xl font-bold text-white mb-3">No projects completed yet</h3>
-            <p className="text-slate-200 text-base font-medium mt-2 mb-8 max-w-lg mx-auto leading-relaxed">Be the first to build something amazing and showcase it to the Vyoma community!</p>
+          <div className="text-center py-20 glass-panel rounded-3xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+            <Code2 size={56} className="mx-auto mb-6 text-green-400" />
+            <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">No projects completed yet</h3>
+            <p className="text-white text-lg md:text-xl font-medium mt-3 mb-8 max-w-xl mx-auto leading-relaxed opacity-95">Be the first to build something amazing and showcase it to the Vyoma community!</p>
             <Link to="/projects" className="glass-btn px-8 py-3.5 text-white font-bold inline-flex items-center gap-2 hover:scale-105 transition-transform shadow-lg">
               <Layers size={18} /> View Active Rooms
             </Link>
