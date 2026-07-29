@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: devassembly-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_secure_pass
+      POSTGRES_DB: vyoma
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devassembly-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      NODE_ENV: production
+      JWT_SECRET: devassembly_prod_jwt_secret_98a7b6c5d4e3f2a1
+      ALLOWED_ORIGINS: "http://localhost:5173,http://localhost:5000"
+      PGHOST: postgres
+      PGUSER: postgres
+      PGPASSWORD: postgres_secure_pass
+      PGDATABASE: vyoma
+      PGPORT: 5432
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:

@@ -1,0 +1,47 @@
+# Environment & Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+!.env.example
+
+# Credentials & Certificates
+*OAuth*.txt
+*OAUTH*.txt
+client_secret_*.json
+*.key
+*.pem
+*.cert
+*.crt
+
+# Dependencies & Package outputs
+node_modules/
+dist/
+build/
+*.tgz
+*.zip
+*.tar.gz
+
+# Temp & Runtime Storage
+temp/*
+!temp/.gitkeep
+*.tmp
+*.log
+backend/temp/*
+!backend/temp/.gitkeep
+backend/db.json
+
+# OS & IDE System Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
