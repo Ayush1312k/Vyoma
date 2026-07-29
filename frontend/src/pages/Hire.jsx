@@ -285,12 +285,12 @@ const Hire = () => {
         </div>
 
         {filteredProfiles.length === 0 && (
-          <div className="text-center py-20">
-            <Users size={48} className="mx-auto mb-4 text-gray-700" />
-            <h3 className="text-lg font-medium text-gray-400 mb-2">
+          <div className="text-center py-20 glass-panel rounded-3xl border border-white/10">
+            <Users size={48} className="mx-auto mb-4 text-amber-400/80" />
+            <h3 className="text-xl font-bold text-white mb-2">
               {profiles.length === 0 ? 'No developers found yet' : 'No profiles match your filters'}
             </h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-base text-slate-200 font-medium">
               {profiles.length === 0 ? 'Be the first to join! Complete your profile to appear here.' : 'Try adjusting your domain, country, or city filters'}
             </p>
           </div>
