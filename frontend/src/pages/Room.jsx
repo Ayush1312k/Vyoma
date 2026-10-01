@@ -96,7 +96,31 @@ const Room = () => {
   const [showCredits, setShowCredits] = useState(false);
   const [roomCredits, setRoomCredits] = useState(() => {
     const saved = localStorage.getItem(`da_credits_${id}`);
-    return saved ? JSON.parse(saved) : [];
+    if (saved) {
+      try { return JSON.parse(saved); } catch {}
+    }
+    if (id === 'proj-realtime-canvas') {
+      return [
+        { name: 'Sarah Chen', role: 'Frontend Lead', isDemo: true, avatar: '/demo-avatars/pro_avatar5.jpg', status: 'working' },
+        { name: 'Alexander Wright', role: 'WebSocket Architect', isDemo: true, avatar: '/demo-avatars/pro_avatar3.jpg', status: 'working' },
+        { name: 'Ayush Kumar', role: 'Lead Architect', isDemo: false, avatar: '/ayush_profile.jpg', status: 'working' }
+      ];
+    }
+    if (id === 'proj-neural-indexer') {
+      return [
+        { name: 'Alexander Wright', role: 'ML Systems Lead', isDemo: true, avatar: '/demo-avatars/pro_avatar3.jpg', status: 'working' },
+        { name: 'Marcus Vance', role: 'Distributed Systems', isDemo: true, avatar: '/demo-avatars/pro_avatar4.jpg', status: 'working' }
+      ];
+    }
+    if (id === 'proj-cloud-mesh') {
+      return [
+        { name: 'Marcus Vance', role: 'Go Core Dev', isDemo: true, avatar: '/demo-avatars/pro_avatar4.jpg', status: 'working' },
+        { name: 'Elena Rostova', role: 'eBPF Security Lead', isDemo: true, avatar: '/demo-avatars/pro_avatar2.jpg', status: 'working' }
+      ];
+    }
+    return [
+      { name: 'Ayush Kumar', role: 'Lead Developer', isDemo: false, avatar: '/ayush_profile.jpg', status: 'working' }
+    ];
   });
   const [showCompleteModal, setShowCompleteModal] = useState(false);
   const [completeForm, setCompleteForm] = useState({ github: '', live: '' });
@@ -607,11 +631,22 @@ const Room = () => {
                   roomCredits.map((credit, i) => (
                     <div key={i} className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-xs font-bold">
-                          {credit.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
-                        </div>
+                        {credit.avatar ? (
+                          <img src={credit.avatar} alt={credit.name} className="w-10 h-10 rounded-full object-cover border border-white/20 shrink-0 shadow-md" />
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-xs font-bold text-white shrink-0">
+                            {credit.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
+                          </div>
+                        )}
                         <div>
-                          <div className="text-sm font-medium text-white">{credit.name}</div>
+                          <div className="text-sm font-medium text-white flex items-center gap-1.5">
+                            <span>{credit.name}</span>
+                            {credit.isDemo && (
+                              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-widest">
+                                demo
+                              </span>
+                            )}
+                          </div>
                           <div className="text-xs text-gray-400">{credit.role}</div>
                         </div>
                       </div>

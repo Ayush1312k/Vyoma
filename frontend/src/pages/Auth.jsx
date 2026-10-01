@@ -58,10 +58,12 @@ const Auth = () => {
       setLoading(false);
     }
   };
+  const isPlaceholder = (id) => !id || id.includes('placeholder') || id.includes('your_');
+
   const handleGoogle = () => {
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    if (!clientId || clientId === 'your_google_client_id') {
-      toast.error('Google Client ID is not configured');
+    if (isPlaceholder(clientId)) {
+      toast.error('Google Client ID is not configured. Please add your real Client ID in frontend/.env');
       return;
     }
     setLoading(true);
@@ -70,8 +72,8 @@ const Auth = () => {
 
   const handleGithub = () => {
     const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
-    if (!clientId || clientId === 'your_github_client_id') {
-      toast.error('GitHub Client ID is not configured');
+    if (isPlaceholder(clientId)) {
+      toast.error('GitHub Client ID is not configured. Please add your real Client ID in frontend/.env');
       return;
     }
     setLoading(true);

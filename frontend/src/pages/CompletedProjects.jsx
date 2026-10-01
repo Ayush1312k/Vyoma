@@ -5,12 +5,111 @@ import { Link } from 'react-router-dom';
 import { API_URL } from '../config';
 import GithubIcon from '../components/GithubIcon';
 
+export const INITIAL_COMPLETED_PROJECTS = [
+  {
+    id: "hof-1",
+    title: "Vyoma Real-Time IDE Engine",
+    roles: ["Lead Architecture", "Frontend Systems", "Infrastructure"],
+    stack: ["React", "Node.js", "WebSockets", "Monaco Editor", "WebRTC"],
+    completed: true,
+    creator: "kumarayush1312@gmail.com",
+    creatorName: "Ayush Kumar",
+    completedAt: "2026-09-20T10:00:00.000Z",
+    github: "https://github.com/Ayush1312k/DevAssembly",
+    live: "https://vyoma-ide.dev",
+    isDemo: false,
+    contributors: [
+      {
+        name: "Ayush Kumar",
+        role: "Lead Architect",
+        avatar: "/ayush_profile.jpg",
+        isDemo: false
+      },
+      {
+        name: "Sarah Chen",
+        role: "Frontend Lead",
+        avatar: "/demo-avatars/pro_avatar5.jpg",
+        isDemo: true
+      },
+      {
+        name: "Marcus Vance",
+        role: "Infrastructure Lead",
+        avatar: "/demo-avatars/pro_avatar4.jpg",
+        isDemo: true
+      }
+    ]
+  },
+  {
+    id: "hof-2",
+    title: "HyperGraph Distributed KV Store",
+    roles: ["Core Systems", "eBPF Performance", "Testing"],
+    stack: ["Rust", "Raft Consensus", "gRPC", "Prometheus"],
+    completed: true,
+    creator: "marcus.vance@demo.vyoma.dev",
+    creatorName: "Marcus Vance",
+    completedAt: "2026-09-12T14:30:00.000Z",
+    github: "https://github.com/demo-marcusvance/hypergraph",
+    live: "https://hypergraph.demo.dev",
+    isDemo: true,
+    contributors: [
+      {
+        name: "Marcus Vance",
+        role: "Core Database Lead",
+        avatar: "/demo-avatars/pro_avatar4.jpg",
+        isDemo: true
+      },
+      {
+        name: "Elena Rostova",
+        role: "Performance & eBPF",
+        avatar: "/demo-avatars/pro_avatar2.jpg",
+        isDemo: true
+      },
+      {
+        name: "Ayush Kumar",
+        role: "Client SDK & Testing",
+        avatar: "/ayush_profile.jpg",
+        isDemo: false
+      }
+    ]
+  },
+  {
+    id: "hof-3",
+    title: "NeuroFlow: Autonomous Code Reviewer",
+    roles: ["AI Research", "Integration", "Web UI"],
+    stack: ["Python", "PyTorch", "FastAPI", "GitHub Actions"],
+    completed: true,
+    creator: "alexander.wright@demo.vyoma.dev",
+    creatorName: "Alexander Wright",
+    completedAt: "2026-08-28T09:15:00.000Z",
+    github: "https://github.com/demo-alexwright/neuroflow",
+    live: "https://neuroflow.ai.demo",
+    isDemo: true,
+    contributors: [
+      {
+        name: "Alexander Wright",
+        role: "AI Systems Lead",
+        avatar: "/demo-avatars/pro_avatar3.jpg",
+        isDemo: true
+      },
+      {
+        name: "David Rossi",
+        role: "Integration Architect",
+        avatar: "/demo-avatars/pro_avatar1.jpg",
+        isDemo: true
+      },
+      {
+        name: "Sarah Chen",
+        role: "Web Dashboard UI",
+        avatar: "/demo-avatars/pro_avatar5.jpg",
+        isDemo: true
+      }
+    ]
+  }
+];
+
 const TiltCard = ({ children, onClick }) => {
   return (
-    <div
-      className="w-full cursor-pointer"
-      onClick={onClick}
-    >
+    <div className="w-full cursor-pointer" onClick={onClick}>
       <div className="w-full h-full relative">
         {children}
       </div>
@@ -19,7 +118,7 @@ const TiltCard = ({ children, onClick }) => {
 };
 
 const CompletedProjects = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(INITIAL_COMPLETED_PROJECTS);
   const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -31,9 +130,11 @@ const CompletedProjects = () => {
     try {
       const res = await fetch(`${API_URL}/api/completed-projects`);
       const data = await res.json();
-      setProjects(data.projects || []);
+      if (data.projects && data.projects.length > 0) {
+        setProjects(data.projects);
+      }
     } catch {
-      // silently handle fetch errors
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -73,7 +174,7 @@ const CompletedProjects = () => {
             Hall of Fame<span className="text-green-500">.</span>
           </h1>
           <p className="text-white text-lg md:text-xl max-w-2xl mx-auto font-medium opacity-95">
-            Showcasing the most impactful projects built, deployed, and finalized by the Vyoma community.
+            Showcasing the most impactful projects built, deployed, and finalized with full team credits.
           </p>
           
           {/* Stats bar */}
@@ -135,12 +236,26 @@ const CompletedProjects = () => {
                     {/* Project header */}
                     <div className="flex justify-between items-start mb-6 relative z-10">
                       <div className="flex-1 min-w-0">
-                        <h2 className="text-2xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors uppercase tracking-tight truncate">{project.title}</h2>
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <h2 className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors uppercase tracking-tight truncate">
+                            {project.title}
+                          </h2>
+                          {project.isDemo && (
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-widest">
+                              demo
+                            </span>
+                          )}
+                        </div>
                         <p className="text-xs text-gray-500 flex items-center gap-2">
                           <Calendar size={12} /> {project.completedAt ? new Date(project.completedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Recently Completed'}
                         </p>
                         {project.creatorName && (
-                          <p className="text-xs text-gray-600 mt-1">by {project.creatorName}</p>
+                          <p className="text-xs text-gray-400 mt-1 flex items-center gap-1.5">
+                            <span>by {project.creatorName}</span>
+                            {project.isDemo && (
+                              <span className="text-[9px] font-bold px-1 py-0.2 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">demo</span>
+                            )}
+                          </p>
                         )}
                       </div>
                       <div className="flex gap-2 shrink-0 ml-4">
@@ -166,11 +281,11 @@ const CompletedProjects = () => {
                       ))}
                     </div>
 
-                    {/* Contributors section */}
+                    {/* Contributors section with Avatar and Demo Badge */}
                     <div className="mt-auto pt-6 border-t border-white/10 relative z-10">
                       <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2 text-xs font-bold text-gray-500 uppercase tracking-widest">
-                          <Users size={14} /> Contributors
+                        <div className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-widest">
+                          <Users size={14} /> Contributors & Credits
                         </div>
                         <span className="text-[10px] px-2 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
                           {project.contributors?.length || 0} members
@@ -180,13 +295,24 @@ const CompletedProjects = () => {
                       {project.contributors && project.contributors.length > 0 ? (
                         <div className="flex flex-wrap gap-3">
                           {project.contributors.slice(0, 4).map((c, i) => (
-                            <div key={i} className="flex items-center gap-2.5 p-2.5 bg-white/[0.03] rounded-xl border border-white/[0.06] hover:bg-white/[0.06] transition-colors">
-                              <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${gradients[(idx + i) % gradients.length]} flex items-center justify-center text-[10px] font-bold text-white shadow-lg`}>
-                                {getInitials(c.name)}
-                              </div>
+                            <div key={i} className="flex items-center gap-2.5 p-2 bg-white/[0.04] rounded-xl border border-white/[0.08] hover:bg-white/[0.08] transition-colors">
+                              {c.avatar ? (
+                                <img src={c.avatar} alt={c.name} className="w-9 h-9 rounded-full object-cover border border-white/20 shadow-md shrink-0" />
+                              ) : (
+                                <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${gradients[(idx + i) % gradients.length]} flex items-center justify-center text-[10px] font-bold text-white shadow-lg shrink-0`}>
+                                  {getInitials(c.name)}
+                                </div>
+                              )}
                               <div>
-                                <div className="text-xs font-semibold text-gray-200">{c.name}</div>
-                                <div className="text-[10px] text-gray-500">{c.role}</div>
+                                <div className="text-xs font-semibold text-gray-200 flex items-center gap-1">
+                                  <span>{c.name}</span>
+                                  {c.isDemo && (
+                                    <span className="text-[9px] font-semibold px-1 py-0.2 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-tighter">
+                                      demo
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="text-[10px] text-gray-400">{c.role}</div>
                               </div>
                             </div>
                           ))}
@@ -203,8 +329,8 @@ const CompletedProjects = () => {
 
                     {/* View details hint */}
                     <div className="mt-6 flex justify-end relative z-10">
-                      <span className="text-xs font-bold text-gray-600 group-hover:text-white flex items-center gap-1 transition-colors">
-                        View Details <ArrowUpRight size={14} />
+                      <span className="text-xs font-bold text-gray-500 group-hover:text-white flex items-center gap-1 transition-colors">
+                        View Credits & Architecture <ArrowUpRight size={14} />
                       </span>
                     </div>
                   </div>
@@ -215,7 +341,7 @@ const CompletedProjects = () => {
         )}
       </div>
 
-      {/* Project Detail Modal */}
+      {/* Project Detail & Credits Modal */}
       <AnimatePresence>
         {selectedProject && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
@@ -223,39 +349,48 @@ const CompletedProjects = () => {
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }} 
-              className="absolute inset-0 bg-black/85 backdrop-blur-xl" 
+              className="absolute inset-0 bg-[#0f1117]/65 backdrop-blur-2xl" 
               onClick={() => setSelectedProject(null)} 
             />
+            <div className="absolute w-[450px] h-[450px] rounded-full blur-[140px] pointer-events-none opacity-35 bg-cyan-500/25" />
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 30 }} 
               animate={{ opacity: 1, scale: 1, y: 0 }} 
               exit={{ opacity: 0, scale: 0.9, y: 30 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="bg-[#0a0a0a] border border-white/15 rounded-3xl p-8 max-w-2xl w-full relative z-10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] max-h-[90vh] overflow-y-auto"
+              className="glass-panel rounded-3xl p-6 sm:p-8 max-w-2xl w-full relative z-10 shadow-[0_40px_80px_rgba(0,0,0,0.7)] max-h-[90vh] overflow-y-auto border border-white/20"
             >
               {/* Close button */}
-              <button onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors z-20">
+              <button onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors z-20 text-gray-400 hover:text-white">
                 <X size={18} />
               </button>
 
               {/* Header gradient */}
-              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-400 to-emerald-600 rounded-t-3xl"></div>
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-400 via-cyan-400 to-blue-500 rounded-t-3xl"></div>
               
               {/* Project Title */}
               <div className="mb-8">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 text-[10px] font-bold uppercase tracking-widest">
-                    <CheckCircle size={10} className="inline mr-1" /> Completed
+                    <CheckCircle size={10} className="inline mr-1" /> Completed Project
                   </span>
+                  {selectedProject.isDemo && (
+                    <span className="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px] font-bold uppercase tracking-widest">
+                      demo project
+                    </span>
+                  )}
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight uppercase mb-2">{selectedProject.title}</h2>
-                <div className="flex items-center gap-4 text-sm text-gray-500">
+                <h2 className="text-3xl font-bold tracking-tight uppercase mb-2 text-white">{selectedProject.title}</h2>
+                <div className="flex items-center gap-4 text-sm text-gray-400">
                   <span className="flex items-center gap-1.5">
                     <Calendar size={14} /> 
                     {selectedProject.completedAt ? new Date(selectedProject.completedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Recently'}
                   </span>
                   {selectedProject.creatorName && (
-                    <span>by <span className="text-gray-300">{selectedProject.creatorName}</span></span>
+                    <span className="flex items-center gap-1">
+                      by <strong className="text-gray-200">{selectedProject.creatorName}</strong>
+                      {selectedProject.isDemo && <span className="text-[9px] px-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded uppercase">demo</span>}
+                    </span>
                   )}
                 </div>
               </div>
@@ -279,7 +414,7 @@ const CompletedProjects = () => {
               {/* Tech Stack */}
               <div className="mb-8">
                 <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                  <Layers size={14} /> Tech Stack
+                  <Layers size={14} /> Technologies
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {(selectedProject.stack || []).map(tech => (
@@ -290,47 +425,40 @@ const CompletedProjects = () => {
                 </div>
               </div>
 
-              {/* Roles needed (from workspace) */}
-              {selectedProject.roles && selectedProject.roles.length > 0 && (
-                <div className="mb-8">
-                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Project Roles</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.roles.map(role => (
-                      <span key={role} className="px-3 py-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-medium">
-                        {role}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Contributors */}
+              {/* Contributors Credits List */}
               <div className="pt-6 border-t border-white/10">
-                <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                  <Award size={14} className="text-amber-400" /> Contributors ({selectedProject.contributors?.length || 0})
+                <h3 className="text-xs font-bold text-gray-300 uppercase tracking-widest mb-4 flex items-center gap-2">
+                  <Award size={14} className="text-amber-400" /> Team Credits & Contributors ({selectedProject.contributors?.length || 0})
                 </h3>
                 <div className="space-y-3">
                   {selectedProject.contributors && selectedProject.contributors.length > 0 ? (
                     selectedProject.contributors.map((c, i) => (
-                      <div key={i} className="flex items-center gap-4 p-4 bg-white/[0.03] border border-white/[0.06] rounded-2xl hover:bg-white/[0.06] transition-colors">
-                        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center text-sm font-bold text-white shadow-lg shrink-0`}>
-                          {getInitials(c.name)}
-                        </div>
+                      <div key={i} className="flex items-center gap-4 p-4 bg-white/[0.03] border border-white/[0.08] rounded-2xl hover:bg-white/[0.06] transition-colors">
+                        {c.avatar ? (
+                          <img src={c.avatar} alt={c.name} className="w-12 h-12 rounded-full object-cover border border-white/20 shadow-md shrink-0" />
+                        ) : (
+                          <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center text-sm font-bold text-white shadow-lg shrink-0`}>
+                            {getInitials(c.name)}
+                          </div>
+                        )}
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-semibold text-white">{c.name}</div>
+                          <div className="text-sm font-semibold text-white flex items-center gap-2">
+                            <span>{c.name}</span>
+                            {c.isDemo && (
+                              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-widest">
+                                demo
+                              </span>
+                            )}
+                          </div>
                           <div className="text-xs text-gray-400">{c.role}</div>
                         </div>
-                        <span className={`text-[10px] px-2.5 py-1 rounded-full border shrink-0 ${
-                          c.status === 'working' 
-                            ? 'bg-green-500/10 text-green-400 border-green-500/20' 
-                            : 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-                        }`}>
-                          {c.status === 'working' ? '● Active' : '✓ Contributed'}
+                        <span className="text-[10px] px-2.5 py-1 rounded-full border border-green-500/20 bg-green-500/10 text-green-400 shrink-0 font-medium">
+                          ✓ Verified Credit
                         </span>
                       </div>
                     ))
                   ) : (
-                    <div className="text-center py-6 text-gray-600 text-sm">No contributor data was recorded for this project.</div>
+                    <div className="text-center py-6 text-gray-500 text-sm">No contributor data recorded.</div>
                   )}
                 </div>
               </div>

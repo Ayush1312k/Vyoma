@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Code2, Terminal, Mic, Briefcase, Users, Award, Zap, Globe, Lock, ArrowRight } from 'lucide-react';
+import { Code2, Terminal, Mic, Briefcase, Users, Award, Zap, Globe, Lock, ArrowRight, Eye } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const FeatureCard = ({ icon: Icon, title, description, delay }) => (
   <motion.div
@@ -23,6 +24,8 @@ const FeatureCard = ({ icon: Icon, title, description, delay }) => (
 const Home = () => {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
+  const { user, toggleViewMode } = useAuth();
+  const isEmployer = user?.accountType === 'employer';
 
   return (
     <div className="flex flex-col min-h-screen bg-transparent text-white font-mono selection:bg-cyan-500 selection:text-black">
@@ -41,7 +44,7 @@ const Home = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-8">
-              <Zap size={14} /> The Future of Development
+              <Zap size={14} /> Open Real-Time Ecosystem
             </div>
             <h1 className="text-6xl md:text-8xl font-bold leading-[0.9] tracking-tighter uppercase mb-8">
               Code.<br />
@@ -49,12 +52,18 @@ const Home = () => {
               Conquer.
             </h1>
             <p className="text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-10">
-              Vyoma is the ultimate unified platform for developers. Seamlessly transition from writing code in real-time workspaces to getting hired by top recruiters, all in one ecosystem.
+              Vyoma is the unified real-time collaboration platform for developers and employers. Jump directly into live multi-user workspaces or switch to Employer view to recruit talent.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/auth" className="glass-btn px-8 py-4 text-white text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2">
-                Join the Network <ArrowRight size={16} />
+              <Link to="/projects" className="glass-btn px-8 py-4 text-white text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2">
+                Explore Live Rooms <ArrowRight size={16} />
               </Link>
+              <button 
+                onClick={toggleViewMode}
+                className="px-6 py-4 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs uppercase tracking-widest font-semibold hover:bg-amber-500/20 transition-colors flex items-center justify-center gap-2"
+              >
+                <Eye size={16} /> {isEmployer ? 'Switch to Developer View' : 'See What an Employer Sees'}
+              </button>
             </div>
           </motion.div>
 
@@ -75,13 +84,13 @@ const Home = () => {
                 <div className="p-6 font-mono text-sm text-gray-300">
                   <p><span className="text-purple-400">const</span> <span className="text-blue-400">vyoma</span> = <span className="text-cyan-400">new</span> Platform();</p>
                   <p className="mt-2"><span className="text-blue-400">vyoma</span>.<span className="text-yellow-200">init</span>({'{'}</p>
-                  <p className="ml-4 text-green-300">workspaces: true,</p>
+                  <p className="ml-4 text-green-300">collaborator: "Ayush Kumar",</p>
+                  <p className="ml-4 text-green-300">liveRooms: true,</p>
                   <p className="ml-4 text-green-300">voiceChat: true,</p>
-                  <p className="ml-4 text-green-300">liveTerminal: true,</p>
-                  <p className="ml-4 text-green-300">hiringNetwork: true</p>
+                  <p className="ml-4 text-green-300">employerView: true</p>
                   <p>{'}'});</p>
                   <p className="mt-4 text-gray-500">// Terminal Output</p>
-                  <p className="text-green-400">$ System online. Ready to build.</p>
+                  <p className="text-green-400">$ All features unlocked. Ready to collaborate.</p>
                 </div>
               </div>
             </div>
@@ -94,44 +103,44 @@ const Home = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-6">Everything You Need</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">We've eliminated the friction of switching context. Vyoma brings your editor, terminal, team, and career into a single window.</p>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg">We've eliminated sign-in friction. Explore workspaces, test live terminals, inspect code, and discover talent from the start.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <FeatureCard 
               icon={Code2} 
               title="Real-Time Workspaces" 
-              description="Collaborate on code instantly. Our collaborative editor supports syntax highlighting and live cursors, letting you pair program with anyone across the globe without delay."
+              description="Collaborate on code instantly. Live multi-cursor editing, file management, and instant synchronisation with up to 4 active developers per workspace."
               delay={0}
             />
             <FeatureCard 
               icon={Terminal} 
               title="Live Terminal Execution" 
-              description="No need to run local environments. Write your code and execute it directly in the cloud-connected terminal. Supports Bash, Node.js, and Python out of the box."
+              description="Execute code directly in the cloud-connected sandbox. Run JavaScript, Python, Bash, or inspect outputs on the fly."
               delay={0.1}
             />
             <FeatureCard 
               icon={Mic} 
               title="Built-in Voice Chat" 
-              description="Communication is key. Connect your microphone instantly within the workspace using WebRTC. Discuss logic and architecture without opening third-party call apps."
+              description="Connect audio channels directly in the workspace using peer-to-peer WebRTC without needing third-party meeting apps."
               delay={0.2}
             />
             <FeatureCard 
               icon={Users} 
-              title="Global Talent Network" 
-              description="Employers can browse the platform to find top-tier developers. Filter by domain, country, or city and send direct hiring offers that trigger instant in-app notifications."
+              title="Talent Discovery" 
+              description="Explore verified developer and employer portfolios. Filter by domain, skill, country, or city with interactive 3D Dev Cards."
               delay={0.3}
             />
             <FeatureCard 
               icon={Briefcase} 
-              title="Project Marketplace" 
-              description="Monetize your skills. List your completed open-source or private projects on the marketplace. Sell access or transfer ownership securely using our bidding system."
+              title="Employer Dual View" 
+              description="Toggle directly to an Employer perspective at any moment to see recruiter dashboards, talent pipelines, and direct hiring invitations."
               delay={0.4}
             />
             <FeatureCard 
               icon={Award} 
-              title="Hall of Fame & Stats" 
-              description="Every commit and completed project builds your Reputation Score. Climb the leaderboards, establish trust, and showcase your best work on your public Dev Card."
+              title="Hall of Fame & Credits" 
+              description="Every completed project archives its full contributor roster and credits, immortalizing real work and team achievements."
               delay={0.5}
             />
           </div>
@@ -147,19 +156,19 @@ const Home = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter">Engineered for Scale & Security</h2>
+            <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter">Engineered for Scale & Speed</h2>
             <div className="flex gap-4 items-start">
               <div className="p-3 bg-white/5 rounded-xl"><Lock className="text-purple-400" size={24} /></div>
               <div>
-                <h4 className="text-xl font-bold text-white mb-2">Enterprise-Grade Security</h4>
-                <p className="text-gray-400 leading-relaxed">Protected by JWT session handling, rate limiting, and input sanitization. We ensure your code and personal data remain isolated and secure.</p>
+                <h4 className="text-xl font-bold text-white mb-2">Isolated Live Rooms</h4>
+                <p className="text-gray-400 leading-relaxed">Protected by stateful WebSockets and room-scoped event dispatching. Workspaces maintain isolation and sub-millisecond sync.</p>
               </div>
             </div>
             <div className="flex gap-4 items-start">
               <div className="p-3 bg-white/5 rounded-xl"><Globe className="text-blue-400" size={24} /></div>
               <div>
-                <h4 className="text-xl font-bold text-white mb-2">Frictionless Network</h4>
-                <p className="text-gray-400 leading-relaxed">Sign in with GitHub or Google via OAuth. Instantly jump into a workspace or browse the marketplace without tedious configuration steps.</p>
+                <h4 className="text-xl font-bold text-white mb-2">Immediate Access</h4>
+                <p className="text-gray-400 leading-relaxed">No credentials or passwords required. Browse the live projects, join interactive sessions, and view demo engineering profiles right away.</p>
               </div>
             </div>
           </motion.div>
@@ -173,7 +182,7 @@ const Home = () => {
             <div className="glass-panel p-8 rounded-3xl border border-white/10 relative z-10 flex items-center justify-center min-h-[300px]">
                <div className="text-center">
                  <div className="inline-block p-6 bg-black/50 rounded-full border border-white/10 mb-6">
-                   <Code2 size={48} className="text-white" />
+                   <Code2 size={48} className="text-cyan-400" />
                  </div>
                  <h3 className="text-2xl font-bold uppercase tracking-widest text-white">Cloud Architecture</h3>
                </div>
@@ -192,31 +201,17 @@ const Home = () => {
           className="max-w-4xl mx-auto text-center relative z-10"
         >
           <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-8">Stop Reading.<br/>Start Building.</h2>
-          <p className="text-xl text-gray-400 mb-12">Join developers and employers shaping the future.</p>
+          <p className="text-xl text-gray-400 mb-12">Dive into active collaboration rooms or initialize a workspace.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/auth" className="bg-white text-black px-10 py-4 rounded-full text-sm uppercase tracking-widest font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2">
-              Create Free Account <ArrowRight size={16} />
+            <Link to="/projects" className="bg-white text-black px-10 py-4 rounded-full text-sm uppercase tracking-widest font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2">
+              Explore Live Rooms <ArrowRight size={16} />
+            </Link>
+            <Link to="/create" className="glass-btn px-10 py-4 rounded-full text-sm uppercase tracking-widest font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2 text-white">
+              Launch New Workspace <Code2 size={16} />
             </Link>
           </div>
         </motion.div>
       </section>
-      {/* Footer */}
-      <footer className="w-full border-t border-white/10 bg-[#050505] py-12 px-6 md:px-24 relative z-10 font-sans">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <img src="/logo-mark-cyan.png" alt="Vyoma Logo" className="w-8 h-8 object-contain filter drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-            <span className="text-xl font-bold tracking-widest text-white uppercase">VYOMA</span>
-          </div>
-          <p className="text-xs text-gray-500 text-center md:text-left">
-            © {new Date().getFullYear()} Vyoma. Real-Time Collaborative Coding Platform. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6 text-xs text-gray-400">
-            <Link to="/projects" className="hover:text-cyan-400 transition-colors">Projects</Link>
-            <Link to="/marketplace" className="hover:text-cyan-400 transition-colors">Marketplace</Link>
-            <Link to="/hall-of-fame" className="hover:text-cyan-400 transition-colors">Hall of Fame</Link>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
