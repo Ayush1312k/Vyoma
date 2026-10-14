@@ -590,12 +590,9 @@ const Hire = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.04 }}
-              className="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-white/10 hover:border-white/25 transition-all group cursor-pointer relative overflow-hidden flex flex-col justify-between"
+              className="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 transition-all group cursor-pointer relative overflow-hidden flex flex-col justify-between"
               onClick={() => setSelectedProfile(profile)}
             >
-              {/* Header line */}
-              <div className={`absolute top-0 left-0 w-full h-1 ${profile.accountType === 'employer' ? 'bg-amber-400' : 'bg-cyan-400'}`}></div>
-
               <div>
                 <div className="flex items-start gap-4 mb-4">
                   {profile.avatar ? (

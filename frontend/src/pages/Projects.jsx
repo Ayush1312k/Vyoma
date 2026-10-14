@@ -121,9 +121,8 @@ const Projects = () => {
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.35, delay: i * 0.05 }}
-                className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel flex flex-col justify-between min-h-[240px] sm:min-h-[260px] border border-white/10 hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all relative overflow-hidden"
+                className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel flex flex-col justify-between min-h-[240px] sm:min-h-[260px] transition-all relative overflow-hidden"
               >
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500/0 via-cyan-500/60 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 
                 <div>
                   <div className="flex justify-between items-start mb-3 gap-2">

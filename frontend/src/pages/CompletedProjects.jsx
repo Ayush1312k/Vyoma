@@ -226,9 +226,7 @@ const CompletedProjects = () => {
                 className="group"
               >
                 <TiltCard onClick={() => setSelectedProject(project)}>
-                  <div className="glass-panel rounded-2xl sm:rounded-[2.5rem] p-5 sm:p-8 h-full border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] flex flex-col relative overflow-hidden min-h-[380px] sm:min-h-[420px]">
-                    {/* Header gradient line */}
-                    <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${gradients[idx % gradients.length]}`}></div>
+                  <div className="glass-panel rounded-2xl sm:rounded-[2.5rem] p-5 sm:p-8 h-full flex flex-col relative overflow-hidden min-h-[380px] sm:min-h-[420px]">
                     
                     {/* Ambient glow */}
                     <div className={`absolute -top-32 -right-32 w-64 h-64 bg-gradient-to-br ${gradients[idx % gradients.length]} opacity-[0.05] rounded-full blur-[80px]`}></div>

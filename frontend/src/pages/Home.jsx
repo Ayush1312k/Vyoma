@@ -10,10 +10,9 @@ const FeatureCard = ({ icon: Icon, title, description, delay }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.5, delay }}
-    className="group glass-panel p-8 rounded-3xl flex flex-col justify-between border border-white/5 hover:border-cyan-500/30 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] relative overflow-hidden"
+    className="group glass-panel p-8 rounded-3xl flex flex-col justify-between transition-all relative overflow-hidden"
   >
-    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500/0 via-cyan-500/50 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-    <div className="p-4 bg-white/5 rounded-2xl w-max mb-6 group-hover:scale-110 transition-transform">
+    <div className="p-4 bg-white/5 rounded-2xl w-max mb-6 group-hover:scale-105 transition-transform">
       <Icon size={32} className="text-cyan-400" />
     </div>
     <h3 className="text-2xl font-bold mb-4 uppercase tracking-tight text-white">{title}</h3>
@@ -73,7 +72,7 @@ const Home = () => {
             transition={{ duration: 1, delay: 0.2 }}
             className="hidden lg:block relative"
           >
-            <div className="glass-panel p-2 rounded-[2rem] border border-white/20 shadow-[0_0_50px_rgba(6,182,212,0.2)] rotate-[-2deg] hover:rotate-0 transition-transform duration-500">
+            <div className="glass-panel p-2 rounded-[2rem] rotate-[-2deg] hover:rotate-0 transition-transform duration-500">
               <div className="bg-[#050505] rounded-[1.75rem] overflow-hidden">
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-[#0a0a0a]">
                   <div className="w-3 h-3 rounded-full bg-red-500"></div>

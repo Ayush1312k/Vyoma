@@ -5,14 +5,14 @@
   --accent-grey: #444444;
   --light-grey: #b3b3b3;
 
-  /* TriOptus Brand Glassmorphism Palette & Floating Water Glow */
+  /* TriOptus Brand 3D Depth Shadows */
   --trioptus-blue: #1d4ed8;
   --trioptus-cyan: #0ea5e9;
   --trioptus-mint: #10b981;
-  --glow-shadow: 0 20px 50px -10px rgba(29, 78, 216, 0.22), 
-                 0 10px 20px -5px rgba(16, 185, 129, 0.12);
-  --glow-shadow-hover: 0 30px 70px -12px rgba(29, 78, 216, 0.38), 
-                       0 15px 30px -6px rgba(16, 185, 129, 0.22);
+  --glow-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.7), 
+                 0 8px 16px -4px rgba(0, 0, 0, 0.5);
+  --glow-shadow-hover: 0 28px 56px -10px rgba(0, 0, 0, 0.8), 
+                       0 12px 24px -4px rgba(0, 0, 0, 0.6);
 }
 html {
   overflow-x: hidden;
@@ -29,12 +29,20 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 .glass-panel-legacy {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 1.5px solid rgba(255, 255, 255, 0.28);
-  box-shadow: var(--glow-shadow);
+  background: rgba(12, 16, 26, 0.93);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-style: solid;
+  border-width: 1.5px 1.5px 2.5px 1.5px;
+  border-top-color: rgba(255, 255, 255, 0.35);
+  border-left-color: rgba(255, 255, 255, 0.2);
+  border-right-color: rgba(0, 0, 0, 0.45);
+  border-bottom-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 
+    0 20px 45px -8px rgba(0, 0, 0, 0.75), 
+    0 8px 18px -4px rgba(0, 0, 0, 0.5),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.22),
+    inset 0 -2.5px 4px rgba(0, 0, 0, 0.55);
 }
 .hover-glow:hover {
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
@@ -54,89 +62,50 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-/* TriOptus Floating Water Glassmorphism */
+/* TriOptus 3D Frosted Glass Architecture */
 :root {
-  --glass-bg: rgba(14, 19, 32, 0.78);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-border-top: rgba(255, 255, 255, 0.65);
+  --glass-bg: rgba(12, 16, 26, 0.93);
+  --glass-border-top: rgba(255, 255, 255, 0.35);
+  --glass-border-left: rgba(255, 255, 255, 0.2);
+  --glass-border-right: rgba(0, 0, 0, 0.45);
+  --glass-border-bottom: rgba(0, 0, 0, 0.75);
 }
 
 .glass-panel {
   background: var(--glass-bg);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 60%, rgba(14, 165, 233, 0.04) 100%);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-top: 1.5px solid var(--glass-border-top);
-  border-left: 1.5px solid rgba(255, 255, 255, 0.45);
-  border-right: 1px solid rgba(255, 255, 255, 0.14);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  background-image: linear-gradient(165deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 45%, rgba(0, 0, 0, 0.28) 100%);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-style: solid !important;
+  border-width: 1.5px 1.5px 2.5px 1.5px !important;
+  border-top-color: var(--glass-border-top) !important;
+  border-left-color: var(--glass-border-left) !important;
+  border-right-color: var(--glass-border-right) !important;
+  border-bottom-color: var(--glass-border-bottom) !important;
   box-shadow: 
-    var(--glow-shadow),
-    0 20px 45px rgba(0, 0, 0, 0.5), 
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.45),
-    inset 0 -2px 3px rgba(0, 0, 0, 0.3);
+    0 20px 45px -8px rgba(0, 0, 0, 0.75), 
+    0 8px 18px -4px rgba(0, 0, 0, 0.5),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.22),
+    inset 0 -2.5px 4px rgba(0, 0, 0, 0.55) !important;
   position: relative;
   overflow: hidden;
   transform: translateZ(0); /* Hardware acceleration */
-  transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.35s ease, background 0.35s ease;
 }
 
 .glass-panel:hover {
-  background: rgba(18, 25, 42, 0.85);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 60%, rgba(14, 165, 233, 0.08) 100%);
-  border-color: rgba(14, 165, 233, 0.45);
-  border-top-color: rgba(255, 255, 255, 0.85);
-  border-left-color: rgba(255, 255, 255, 0.65);
+  background: rgba(15, 20, 32, 0.96);
+  background-image: linear-gradient(165deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0.32) 100%);
+  transform: translateY(-4px) translateZ(0);
+  border-top-color: rgba(255, 255, 255, 0.5) !important;
+  border-left-color: rgba(255, 255, 255, 0.28) !important;
+  border-right-color: rgba(0, 0, 0, 0.55) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.85) !important;
   box-shadow: 
-    var(--glow-shadow-hover),
-    0 28px 60px rgba(0, 0, 0, 0.6),
-    inset 0 2px 3px rgba(255, 255, 255, 0.65);
-}
-
-/* TriOptus Water Surface Spot Glow */
-.glass-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(14, 165, 233, 0.09) 0%,
-    rgba(16, 185, 129, 0.04) 40%,
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* TriOptus Colored Glowing Edge Border Glow */
-.glass-panel::after {
-  content: "";
-  position: absolute;
-  inset: -1px; /* Cover border */
-  border-radius: inherit;
-  padding: 1.5px; /* Width of glowing border */
-  background: radial-gradient(
-    550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(56, 189, 248, 0.85) 0%,
-    rgba(29, 78, 216, 0.65) 25%,
-    rgba(16, 185, 129, 0.5) 50%,
-    transparent 75%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#a5a5a5 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  z-index: 2;
-}
-
-.glass-panel:hover::before,
-.glass-panel:hover::after {
-  opacity: 1;
+    0 28px 56px -10px rgba(0, 0, 0, 0.85),
+    0 12px 24px -4px rgba(0, 0, 0, 0.6),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.32),
+    inset 0 -2.5px 4px rgba(0, 0, 0, 0.65) !important;
 }
 
 /* Global Torch Effect — TriOptus Cyan & Emerald Aura */
@@ -238,13 +207,13 @@ body {
 .glass-pill:hover {
   background: rgba(255, 255, 255, 0.22);
   background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.1) 100%);
-  border-color: rgba(56, 189, 248, 0.6);
   border-top-color: #ffffff;
   border-left-color: rgba(255, 255, 255, 0.85);
+  border-right-color: rgba(0, 0, 0, 0.3);
+  border-bottom-color: rgba(0, 0, 0, 0.5);
   color: #ffffff;
   box-shadow: 
-    0 16px 36px rgba(0, 0, 0, 0.35),
-    0 0 25px rgba(14, 165, 233, 0.35),
+    0 16px 36px rgba(0, 0, 0, 0.4),
     inset 0 2px 4px rgba(255, 255, 255, 0.95);
   transform: translateY(-2px) scale(1.03);
 }
@@ -258,20 +227,17 @@ body {
 
 .glass-pill-active {
   background: rgba(255, 255, 255, 0.26);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.42) 0%, rgba(14, 165, 233, 0.25) 100%);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.15) 100%);
   backdrop-filter: blur(25px) saturate(190%);
   -webkit-backdrop-filter: blur(25px) saturate(190%);
-  border-color: rgba(14, 165, 233, 0.65);
   border-top: 1.5px solid #ffffff;
   border-left: 1.5px solid rgba(255, 255, 255, 0.9);
-  border-right: 1px solid rgba(14, 165, 233, 0.5);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 50px;
   color: #ffffff;
   box-shadow: 
-    0 12px 30px rgba(0, 0, 0, 0.35),
-    0 0 25px rgba(14, 165, 233, 0.45),
-    0 0 12px rgba(16, 185, 129, 0.3),
+    0 14px 32px rgba(0, 0, 0, 0.4),
     inset 0 2px 4px rgba(255, 255, 255, 0.95);
   transform: translateY(-1px);
 }
@@ -421,20 +387,24 @@ body {
   transform: translateY(0) scale(0.98);
 }
 
-/* Glass Button — TriOptus Water Capsule Style */
+/* Glass Button — 3D Frosted Capsule Style */
 .glass-btn {
   background: rgba(255, 255, 255, 0.12);
   background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
   backdrop-filter: blur(20px) saturate(170%);
   -webkit-backdrop-filter: blur(20px) saturate(170%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-top: 1.5px solid rgba(255, 255, 255, 0.65);
-  border-left: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-style: solid;
+  border-width: 1.5px 1.5px 2px 1.5px;
+  border-top-color: rgba(255, 255, 255, 0.75);
+  border-left-color: rgba(255, 255, 255, 0.5);
+  border-right-color: rgba(0, 0, 0, 0.35);
+  border-bottom-color: rgba(0, 0, 0, 0.55);
   border-radius: 9999px;
   box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.25), 
-    0 0 20px -5px rgba(29, 78, 216, 0.3),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.5);
+    0 8px 20px rgba(0, 0, 0, 0.35), 
+    0 3px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.5),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.3);
   transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
   color: white;
@@ -443,13 +413,15 @@ body {
 }
 
 .glass-btn:hover {
-  background: rgba(255, 255, 255, 0.22);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.08) 100%);
-  border-color: rgba(14, 165, 233, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.08) 100%);
   border-top-color: #ffffff;
+  border-left-color: rgba(255, 255, 255, 0.75);
+  border-right-color: rgba(0, 0, 0, 0.45);
+  border-bottom-color: rgba(0, 0, 0, 0.7);
   box-shadow: 
-    0 12px 35px -5px rgba(29, 78, 216, 0.5), 
-    0 4px 15px -2px rgba(16, 185, 129, 0.35),
+    0 14px 32px rgba(0, 0, 0, 0.5), 
+    0 5px 12px rgba(0, 0, 0, 0.3),
     inset 0 2px 3px rgba(255, 255, 255, 0.7);
   transform: translateY(-2px);
 }
