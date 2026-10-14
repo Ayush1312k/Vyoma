@@ -21,7 +21,7 @@ export const PrivacyPolicyModal = ({ isOpen, onClose }) => {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-        className="relative z-10 w-full max-w-2xl bg-[#0a0a0d] border border-white/15 rounded-3xl p-6 sm:p-8 max-h-[85vh] overflow-y-auto shadow-[0_25px_60px_rgba(0,0,0,0.8)]"
+        className="relative z-10 w-[calc(100vw-2rem)] max-w-2xl bg-[#0a0a0d] border border-white/15 rounded-2xl sm:rounded-3xl p-5 sm:p-8 max-h-[85vh] overflow-y-auto shadow-[0_25px_60px_rgba(0,0,0,0.8)]"
       >
         <div className="flex items-start justify-between border-b border-white/10 pb-4 mb-6">
           <div className="flex items-center gap-3">
@@ -108,8 +108,8 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="w-full border-t border-white/10 bg-[#050508] py-12 px-6 md:px-16 relative z-10 font-sans mt-auto">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      <footer className="w-full border-t border-white/10 bg-[#050508] py-8 sm:py-12 px-4 sm:px-8 md:px-16 relative z-10 font-sans mt-auto">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
           {/* Logo & Copyright */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
             <Link to="/" className="flex items-center gap-2.5 group">
@@ -135,7 +135,7 @@ const Footer = () => {
           </div>
 
           {/* Navigation & Links */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-400">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-gray-400">
             <Link to="/projects" className="hover:text-cyan-400 transition-colors">
               Projects
             </Link>

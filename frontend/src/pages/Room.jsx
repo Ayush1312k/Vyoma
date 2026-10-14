@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, MessageSquare, Code, Mic, Settings, Save, Send, ArrowLeft, Lock, Eye, EyeOff, ShieldCheck, Loader2, Trash2, X, Globe, Copy, Plus, FileText, Users, Award } from 'lucide-react';
+import { Play, MessageSquare, Code, Mic, Settings, Save, Send, ArrowLeft, Lock, Eye, EyeOff, ShieldCheck, Loader2, Trash2, X, Globe, Copy, Plus, FileText, Users, Award, Terminal as TerminalIcon } from 'lucide-react';
 import GithubIcon from '../components/GithubIcon';
 import Editor from '@monaco-editor/react';
 import toast from 'react-hot-toast';
@@ -14,17 +14,17 @@ import { API_URL, socket } from '../config';
 const JoinGate = ({ onJoin, onView }) => {
   const [roleInput, setRoleInput] = useState('');
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-80px)] bg-transparent relative overflow-hidden">
+    <div className="flex items-center justify-center min-h-[calc(100vh-80px)] p-4 bg-transparent relative overflow-hidden">
       {/* Background glow for Gate */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/[0.03] rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/[0.02] rounded-full blur-[80px] pointer-events-none"></div>
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-md p-8">
-        <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 shadow-2xl text-center glass-panel">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 mb-6">
-            <Users size={28} className="text-cyan-400" />
+      <div className="absolute top-0 right-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-cyan-500/[0.03] rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-blue-500/[0.02] rounded-full blur-[80px] pointer-events-none"></div>
+      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-md">
+        <div className="bg-[#050505] border border-white/10 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-2xl text-center glass-panel">
+          <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 mb-5 sm:mb-6">
+            <Users size={26} className="text-cyan-400 sm:w-7 sm:h-7" />
           </div>
-          <h2 className="text-2xl font-semibold text-white mb-2">Workspace #{window.location.pathname.split('/').pop()}</h2>
-          <p className="text-sm text-gray-400 mb-6">Enter your role/domain and choose your access mode.</p>
+          <h2 className="text-xl sm:text-2xl font-semibold text-white mb-2">Workspace #{window.location.pathname.split('/').pop()}</h2>
+          <p className="text-xs sm:text-sm text-gray-400 mb-6">Enter your role/domain and choose your access mode.</p>
           
           {/* Role/Domain Text Input */}
           <div className="mb-6 text-left">
@@ -48,15 +48,15 @@ const JoinGate = ({ onJoin, onView }) => {
                 }
                 onJoin(roleInput.trim());
               }} 
-              className="glass-btn w-full py-3 text-white font-medium flex items-center justify-center gap-2"
+              className="glass-btn w-full py-3 text-white font-medium flex items-center justify-center gap-2 text-sm"
             >
               <Code size={18} /> Join & Edit
             </button>
-            <button onClick={() => onView(roleInput.trim() || 'Viewer')} className="glass-btn w-full py-3 text-gray-300 font-medium flex items-center justify-center gap-2">
+            <button onClick={() => onView(roleInput.trim() || 'Viewer')} className="glass-btn w-full py-3 text-gray-300 font-medium flex items-center justify-center gap-2 text-sm">
               <Eye size={18} /> View Only
             </button>
           </div>
-          <Link to="/projects" className="inline-block mt-6 text-sm text-gray-500 hover:text-white transition-colors">← Back to Projects</Link>
+          <Link to="/projects" className="inline-block mt-6 text-xs sm:text-sm text-gray-500 hover:text-white transition-colors">← Back to Projects</Link>
         </div>
       </motion.div>
     </div>
@@ -71,7 +71,8 @@ const Room = () => {
   const [openTabs, setOpenTabs] = useState([]);
   const [activeFile, setActiveFile] = useState('');
   const [sidebarTab, setSidebarTab] = useState('files'); 
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(() => typeof window !== 'undefined' && window.innerWidth >= 768);
+  const [mobileTab, setMobileTab] = useState('editor'); // 'editor' | 'terminal'
   const [showSettings, setShowSettings] = useState(false);
   const [settings, setSettings] = useState({ theme: 'vs-dark', fontSize: 14, tabSize: 2, wordWrap: true });
   const [messages, setMessages] = useState([]);
@@ -338,6 +339,9 @@ const Room = () => {
   };
   const handleRun = async () => {
     if (!activeFile || !files[activeFile]) return;
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setMobileTab('terminal');
+    }
     setIsRunning(true);
     const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     const newOut = [{ type: 'command', text: `$ run ${activeFile}  [${ts}]` }];
@@ -453,13 +457,13 @@ const Room = () => {
   const currentFile = files[activeFile];
   const senderName = isAuthenticated ? user.name : 'Anonymous';
   return (
-    <div className="flex h-[calc(100vh-80px)] overflow-hidden bg-black text-white">
+    <div className="flex h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] overflow-hidden bg-black text-white relative">
       {Object.entries(cursors).map(([socketId, c]) => {
         const safeName = (c.userName || 'Anonymous').replace(/[^a-zA-Z0-9 _-]/g, '');
         return <style key={socketId}>{`.cursor-${socketId}::after { content: "${safeName}"; }`}</style>;
       })}
       {/* Icon sidebar */}
-      <div className="w-12 border-r border-gray-900 flex flex-col items-center py-4 gap-4 bg-black/40 backdrop-blur-md shrink-0">
+      <div className="w-12 border-r border-gray-900 flex flex-col items-center py-4 gap-4 bg-black/40 backdrop-blur-md shrink-0 z-40">
         <button onClick={() => { setSidebarTab('files'); setSidebarOpen(sidebarTab === 'files' ? !sidebarOpen : true); }} className={`p-2 rounded-lg transition-colors ${sidebarTab === 'files' && sidebarOpen ? 'bg-white text-black' : 'text-gray-500 hover:text-white'}`} title="Explorer"><FileText size={20} /></button>
         <button onClick={() => { setSidebarTab('chat'); setSidebarOpen(sidebarTab === 'chat' ? !sidebarOpen : true); }} className={`p-2 rounded-lg transition-colors ${sidebarTab === 'chat' && sidebarOpen ? 'bg-white text-black' : 'text-gray-500 hover:text-white'}`} title="Chat"><MessageSquare size={20} /></button>
         <button onClick={() => { setSidebarTab('github'); setSidebarOpen(sidebarTab === 'github' ? !sidebarOpen : true); }} className={`p-2 rounded-lg transition-colors ${sidebarTab === 'github' && sidebarOpen ? 'bg-white text-black' : 'text-gray-500 hover:text-white'}`} title="GitHub"><GithubIcon size={20} /></button>
@@ -471,114 +475,145 @@ const Room = () => {
       {/* Side panel (files/chat/github) */}
       <AnimatePresence>
         {sidebarOpen && (
-          <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: 240, opacity: 1 }} exit={{ width: 0, opacity: 0 }} transition={{ duration: 0.15 }} className="absolute left-12 md:static z-40 h-[calc(100vh-80px)] border-r border-gray-900 bg-black/60 backdrop-blur-xl overflow-hidden shrink-0 flex flex-col shadow-2xl md:shadow-none">
-            {sidebarTab === 'files' && <FileExplorer files={files} activeFile={activeFile} onSelect={openFile} onDelete={deleteFile} onCreate={createFile} />}
-            {sidebarTab === 'chat' && (
-              <div className="flex flex-col h-full">
-                <div className="h-10 border-b border-gray-900 flex items-center px-4 bg-black/20 shrink-0"><span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Team Chat</span></div>
-                <div className="flex-1 p-3 overflow-auto flex flex-col gap-3">
-                  {messages.length === 0 ? <div className="text-center text-xs text-gray-600 mt-8">No messages yet</div> : messages.map(m => (
-                    <div key={m.id} className={`flex flex-col ${m.sender === senderName ? 'items-end' : 'items-start'}`}>
-                      <span className="text-[9px] text-gray-600 mb-0.5">{m.sender} • {m.time}</span>
-                      <div className={`px-3 py-1.5 rounded-xl max-w-[90%] text-xs ${m.sender === senderName ? 'bg-blue-600 text-white rounded-br-none' : 'bg-gray-800 text-gray-200 rounded-bl-none'}`}>{m.text}</div>
-                    </div>
-                  ))}
-                  <div ref={chatEndRef} />
+          <>
+            {/* Mobile backdrop */}
+            <div 
+              className="fixed inset-0 z-30 bg-black/60 backdrop-blur-xs md:hidden"
+              onClick={() => setSidebarOpen(false)}
+            />
+            <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: 240, opacity: 1 }} exit={{ width: 0, opacity: 0 }} transition={{ duration: 0.15 }} className="absolute left-12 md:static z-40 h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] border-r border-gray-900 bg-black/90 md:bg-black/60 backdrop-blur-xl overflow-hidden shrink-0 flex flex-col shadow-2xl md:shadow-none">
+              {sidebarTab === 'files' && <FileExplorer files={files} activeFile={activeFile} onSelect={(f) => { openFile(f); if (typeof window !== 'undefined' && window.innerWidth < 768) setSidebarOpen(false); }} onDelete={deleteFile} onCreate={createFile} />}
+              {sidebarTab === 'chat' && (
+                <div className="flex flex-col h-full">
+                  <div className="h-10 border-b border-gray-900 flex items-center px-4 bg-black/20 shrink-0"><span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Team Chat</span></div>
+                  <div className="flex-1 p-3 overflow-auto flex flex-col gap-3">
+                    {messages.length === 0 ? <div className="text-center text-xs text-gray-600 mt-8">No messages yet</div> : messages.map(m => (
+                      <div key={m.id} className={`flex flex-col ${m.sender === senderName ? 'items-end' : 'items-start'}`}>
+                        <span className="text-[9px] text-gray-600 mb-0.5">{m.sender} • {m.time}</span>
+                        <div className={`px-3 py-1.5 rounded-xl max-w-[90%] text-xs ${m.sender === senderName ? 'bg-blue-600 text-white rounded-br-none' : 'bg-gray-800 text-gray-200 rounded-bl-none'}`}>{m.text}</div>
+                      </div>
+                    ))}
+                    <div ref={chatEndRef} />
+                  </div>
+                  <form onSubmit={handleSendMessage} className="flex gap-1.5 p-2 border-t border-gray-900 bg-black/40 backdrop-blur-md shrink-0">
+                    <input type="text" value={msgInput} onChange={e => setMsgInput(e.target.value)} placeholder="Message..." className="flex-1 bg-[#111] border border-gray-800 rounded-full px-3 py-1.5 text-xs text-white focus:outline-none" />
+                    <button type="submit" className="w-7 h-7 bg-white text-black rounded-full flex items-center justify-center shrink-0"><Send size={12} /></button>
+                  </form>
                 </div>
-                <form onSubmit={handleSendMessage} className="flex gap-1.5 p-2 border-t border-gray-900 bg-black/40 backdrop-blur-md shrink-0">
-                  <input type="text" value={msgInput} onChange={e => setMsgInput(e.target.value)} placeholder="Message..." className="flex-1 bg-[#111] border border-gray-800 rounded-full px-3 py-1.5 text-xs text-white focus:outline-none" />
-                  <button type="submit" className="w-7 h-7 bg-white text-black rounded-full flex items-center justify-center shrink-0"><Send size={12} /></button>
-                </form>
-              </div>
-            )}
-            {sidebarTab === 'github' && <GitHubPanel roomId={id} />}
-          </motion.div>
+              )}
+              {sidebarTab === 'github' && <GitHubPanel roomId={id} />}
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
       {/* Main workspace */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="h-auto min-h-[48px] py-2 md:py-0 border-b border-gray-900 flex flex-wrap md:flex-nowrap items-center justify-between px-4 bg-black/40 backdrop-blur-md shrink-0 gap-3 md:gap-0">
-          <div className="flex items-center gap-3">
-            <button onClick={() => navigate('/projects')} className="p-2 hover:bg-white/5 rounded-full transition-colors">
-              <ArrowLeft size={18} className="text-gray-400" />
+        <header className="h-auto min-h-[44px] py-1.5 md:py-0 border-b border-gray-900 flex items-center justify-between px-3 sm:px-4 bg-black/40 backdrop-blur-md shrink-0 gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <button onClick={() => navigate('/projects')} className="p-1.5 hover:bg-white/5 rounded-full transition-colors shrink-0">
+              <ArrowLeft size={16} className="text-gray-400" />
             </button>
-            <div className="flex flex-col">
-              <h1 className="text-sm font-semibold flex items-center gap-2">
-                Room #{id} 
-                <span className="px-2 py-0.5 rounded-full bg-green-500/10 text-[10px] text-green-400 font-bold border border-green-500/20 live-badge-glow">
+            <div className="flex flex-col min-w-0">
+              <h1 className="text-xs sm:text-sm font-semibold flex items-center gap-1.5 truncate">
+                <span className="truncate">Room #{id}</span>
+                <span className="px-1.5 py-0.5 rounded-full bg-green-500/10 text-[9px] text-green-400 font-bold border border-green-500/20 live-badge-glow shrink-0">
                   Live
                 </span>
                 {isVoiceActive && (
-                  <span className="px-2 py-0.5 rounded-full bg-amber-500/10 text-[10px] text-amber-400 font-bold border border-amber-500/20 animate-pulse">
+                  <span className="px-1.5 py-0.5 rounded-full bg-amber-500/10 text-[9px] text-amber-400 font-bold border border-amber-500/20 animate-pulse shrink-0">
                     ● Voice
                   </span>
                 )}
               </h1>
-              <span className="text-[10px] text-gray-500 font-medium">Synced with cloud</span>
+              <span className="text-[9px] text-gray-500 font-medium hidden xs:block">Synced with cloud</span>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="flex -space-x-2 mr-4">
-              {roomUsers.slice(0, 5).map(u => (
-                <div key={u.socketId} className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-[10px] font-bold text-white z-20 relative" style={{ backgroundColor: u.color }} title={u.name}>
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <div className="hidden sm:flex -space-x-2 mr-2">
+              {roomUsers.slice(0, 3).map(u => (
+                <div key={u.socketId} className="w-7 h-7 rounded-full border-2 border-black flex items-center justify-center text-[10px] font-bold text-white z-20 relative" style={{ backgroundColor: u.color }} title={u.name}>
                   {u.name.slice(0,2).toUpperCase()}
                   {activeVoiceUsers[u.socketId] && (
                     <div className="absolute -top-1 -right-1 bg-amber-500 rounded-full p-0.5 border border-black z-30">
-                      <Mic size={10} className="text-black" />
+                      <Mic size={9} className="text-black" />
                     </div>
                   )}
                 </div>
               ))}
-              {roomUsers.length > 5 && (
-                <div className="w-8 h-8 rounded-full bg-gray-800 border-2 border-black flex items-center justify-center text-[10px] font-bold text-white z-10" title="Other users">+{roomUsers.length - 5}</div>
+              {roomUsers.length > 3 && (
+                <div className="w-7 h-7 rounded-full bg-gray-800 border-2 border-black flex items-center justify-center text-[9px] font-bold text-white z-10">+{roomUsers.length - 3}</div>
               )}
             </div>
             <button 
               onClick={() => setShowCredits(!showCredits)}
-              className="flex items-center gap-2 px-3 py-1.5 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-md text-xs font-medium hover:bg-purple-500/20 transition-all active:scale-95"
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-md text-xs font-medium hover:bg-purple-500/20 transition-all active:scale-95"
+              title="Credits"
             >
-              <Award size={14} /> Credits
+              <Award size={14} /> <span className="hidden sm:inline">Credits</span>
             </button>
             <button 
               onClick={handleDeploy}
               disabled={deploying}
-              className="flex items-center gap-2 px-4 py-1.5 bg-green-600/20 border border-green-600/40 text-green-400 rounded-md text-xs font-medium hover:bg-green-600/30 transition-all golden-glow-hover active:scale-95 disabled:opacity-50"
+              className="flex items-center gap-1 px-2.5 sm:px-4 py-1.5 bg-green-600/20 border border-green-600/40 text-green-400 rounded-md text-xs font-medium hover:bg-green-600/30 transition-all golden-glow-hover active:scale-95 disabled:opacity-50"
+              title="Deploy"
             >
               <Globe size={14} />
-              {deploying ? 'Deploying...' : 'Deploy'}
+              <span className="hidden sm:inline">{deploying ? 'Deploying...' : 'Deploy'}</span>
             </button>
-            <button onClick={handleSave} className="flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 text-gray-300 rounded-md text-xs font-medium hover:bg-white/10 transition-all active:scale-95">
-              <Save size={14} /> Save
+            <button onClick={handleSave} className="flex items-center gap-1 px-2.5 sm:px-4 py-1.5 bg-white/5 border border-white/10 text-gray-300 rounded-md text-xs font-medium hover:bg-white/10 transition-all active:scale-95" title="Save">
+              <Save size={14} /> <span className="hidden sm:inline">Save</span>
             </button>
             <button 
               onClick={handleRun}
               disabled={isRunning}
-              className="flex items-center gap-2 px-4 py-1.5 bg-white text-black rounded-md text-xs font-bold hover:bg-amber-50 transition-all golden-glow-hover active:scale-95 disabled:opacity-50"
+              className="flex items-center gap-1 px-2.5 sm:px-4 py-1.5 bg-white text-black rounded-md text-xs font-bold hover:bg-amber-50 transition-all golden-glow-hover active:scale-95 disabled:opacity-50"
+              title="Run"
             >
               {isRunning ? <Loader2 size={14} className="animate-spin" /> : <Play size={14} fill="currentColor" />}
-              Run
+              <span className="hidden xs:inline">Run</span>
             </button>
             {isCreator && (
-              <div className="flex items-center gap-2 ml-2 pl-2 border-l border-white/10">
+              <div className="flex items-center gap-1 ml-1 pl-1 border-l border-white/10">
                 <button 
                   onClick={() => setShowCompleteModal(true)}
                   className="p-1.5 bg-green-500/10 text-green-400 border border-green-500/20 rounded-md hover:bg-green-500/20 transition-all"
                   title="Mark as Completed"
                 >
-                  <ShieldCheck size={16} />
+                  <ShieldCheck size={14} />
                 </button>
                 <button 
                   onClick={handleDeleteRoom}
                   className="p-1.5 bg-red-500/10 text-red-400 border border-red-500/20 rounded-md hover:bg-red-500/20 transition-all"
                   title="Delete Workspace"
                 >
-                  <Trash2 size={16} />
+                  <Trash2 size={14} />
                 </button>
               </div>
             )}
           </div>
         </header>
+
+        {/* Mobile View Toggle Bar: Editor vs Terminal */}
+        <div className="md:hidden flex items-center bg-[#0d0d0d] border-b border-gray-900 px-2 py-1 gap-1 text-xs shrink-0">
+          <button
+            onClick={() => setMobileTab('editor')}
+            className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 font-medium transition-colors ${
+              mobileTab === 'editor' ? 'bg-white/15 text-white font-bold' : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            <Code size={13} /> Code
+          </button>
+          <button
+            onClick={() => setMobileTab('terminal')}
+            className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 font-medium transition-colors ${
+              mobileTab === 'terminal' ? 'bg-white/15 text-white font-bold' : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            <TerminalIcon size={13} /> Terminal
+          </button>
+        </div>
+
         {/* Tabs */}
         <div className="h-9 border-b border-gray-900 flex items-center bg-[#0a0a0a] overflow-x-auto shrink-0">
           {openTabs.map(tab => (
@@ -587,24 +622,24 @@ const Room = () => {
               <button onClick={(e) => closeTab(tab, e)} className="text-gray-600 hover:text-white ml-1"><X size={12} /></button>
             </div>
           ))}
-          <button onClick={() => { const name = prompt('New file name (e.g. app.py, main.dart, index.html):'); if (name) createFile(name); }} className="px-2 h-full text-gray-600 hover:text-white" title="New File"><Plus size={14} /></button>
+          <button onClick={() => { const name = prompt('New file name (e.g. app.py, main.dart, index.html):'); if (name) createFile(name); }} className="px-2 h-full text-gray-600 hover:text-white shrink-0" title="New File"><Plus size={14} /></button>
         </div>
         {/* Editor + Terminal */}
-        <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+        <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
           {/* Editor */}
-          <div className="flex-1 min-w-0 overflow-hidden">
+          <div className={`flex-1 min-w-0 overflow-hidden ${mobileTab === 'editor' ? 'flex flex-col' : 'hidden md:flex md:flex-col'}`}>
             {currentFile ? (
               <div className={`h-full ${accessState === 'view' ? 'pointer-events-none select-none opacity-90' : ''}`}>
                 <Editor onMount={(editor, monaco) => { editorRef.current = editor; window.monaco = monaco; }} height="100%" language={currentFile.language} theme={settings.theme} value={currentFile.content} onChange={handleEditorChange} options={{ readOnly: accessState === 'view', minimap: { enabled: false }, fontSize: settings.fontSize, tabSize: settings.tabSize, wordWrap: settings.wordWrap ? 'on' : 'off', fontFamily: "'JetBrains Mono','Fira Code',monospace", padding: { top: 12 }, smoothScrolling: true, cursorBlinking: 'smooth' }} />
               </div>
             ) : (
               <div className="flex items-center justify-center h-full text-gray-600 text-sm">
-                <div className="text-center"><Code size={48} className="mx-auto mb-4 text-gray-800" /><p>Select a file to start editing</p><p className="text-xs text-gray-700 mt-1">or create a new one with + in the tab bar</p></div>
+                <div className="text-center p-4"><Code size={40} className="mx-auto mb-3 text-gray-800" /><p>Select a file to start editing</p><p className="text-xs text-gray-700 mt-1">or create a new one with + in the tab bar</p></div>
               </div>
             )}
           </div>
           {/* Terminal */}
-          <div className="w-full h-64 md:h-auto md:w-80 lg:w-96 border-t md:border-t-0 md:border-l border-gray-900 bg-black shrink-0 flex flex-col z-10 relative">
+          <div className={`w-full md:w-80 lg:w-96 border-t md:border-t-0 md:border-l border-gray-900 bg-black shrink-0 flex flex-col z-10 relative ${mobileTab === 'terminal' ? 'flex-1' : 'hidden md:flex'}`}>
             <Terminal roomId={id} isRunning={isRunning} runOutput={runOutput} />
           </div>
         </div>

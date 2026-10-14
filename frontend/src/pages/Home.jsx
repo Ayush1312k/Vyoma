@@ -28,39 +28,39 @@ const Home = () => {
   const isEmployer = user?.accountType === 'employer';
 
   return (
-    <div className="flex flex-col min-h-screen bg-transparent text-white font-mono selection:bg-cyan-500 selection:text-black">
+    <div className="flex flex-col min-h-screen bg-transparent text-white font-sans selection:bg-cyan-500 selection:text-black">
       
       {/* Hero Section */}
-      <section className="relative w-full min-h-screen flex flex-col justify-center px-6 md:px-24 py-32 z-10">
+      <section className="relative w-full min-h-[calc(100vh-80px)] flex flex-col justify-center px-4 sm:px-8 md:px-24 py-12 sm:py-20 md:py-32 z-10">
         <motion.div style={{ y }} className="absolute inset-0 z-0 pointer-events-none opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-600 rounded-full blur-[150px] mix-blend-screen"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-600 rounded-full blur-[150px] mix-blend-screen"></div>
+          <div className="absolute top-1/4 left-1/4 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-cyan-600 rounded-full blur-[100px] sm:blur-[150px] mix-blend-screen"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-purple-600 rounded-full blur-[100px] sm:blur-[150px] mix-blend-screen"></div>
         </motion.div>
 
-        <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-8">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-6 sm:mb-8">
               <Zap size={14} /> Open Real-Time Ecosystem
             </div>
-            <h1 className="text-6xl md:text-8xl font-bold leading-[0.9] tracking-tighter uppercase mb-8">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold leading-[1.05] sm:leading-[0.9] tracking-tighter uppercase mb-6 sm:mb-8 break-words font-mono">
               Code.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Collaborate.</span><br />
               Conquer.
             </h1>
-            <p className="text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-10">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-8 sm:mb-10">
               Vyoma is the unified real-time collaboration platform for developers and employers. Jump directly into live multi-user workspaces or switch to Employer view to recruit talent.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/projects" className="glass-btn px-8 py-4 text-white text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+              <Link to="/projects" className="glass-btn px-6 sm:px-8 py-3.5 sm:py-4 text-white text-xs sm:text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2 text-center">
                 Explore Live Rooms <ArrowRight size={16} />
               </Link>
               <button 
                 onClick={toggleViewMode}
-                className="px-6 py-4 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs uppercase tracking-widest font-semibold hover:bg-amber-500/20 transition-colors flex items-center justify-center gap-2"
+                className="px-5 sm:px-6 py-3.5 sm:py-4 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs uppercase tracking-widest font-semibold hover:bg-amber-500/20 transition-colors flex items-center justify-center gap-2 text-center"
               >
                 <Eye size={16} /> {isEmployer ? 'Switch to Developer View' : 'See What an Employer Sees'}
               </button>
@@ -99,14 +99,14 @@ const Home = () => {
       </section>
 
       {/* Features Overview */}
-      <section className="w-full px-6 md:px-24 py-32 relative z-10 bg-transparent">
+      <section className="w-full px-4 sm:px-8 md:px-24 py-16 sm:py-24 md:py-32 relative z-10 bg-transparent">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-6">Everything You Need</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">We've eliminated sign-in friction. Explore workspaces, test live terminals, inspect code, and discover talent from the start.</p>
+          <div className="text-center mb-12 sm:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4 sm:mb-6 font-mono">Everything You Need</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg">We've eliminated sign-in friction. Explore workspaces, test live terminals, inspect code, and discover talent from the start.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             <FeatureCard 
               icon={Code2} 
               title="Real-Time Workspaces" 
@@ -148,27 +148,27 @@ const Home = () => {
       </section>
 
       {/* Security & Architecture */}
-      <section className="w-full px-6 md:px-24 py-32 relative z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="w-full px-4 sm:px-8 md:px-24 py-16 sm:py-24 md:py-32 relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
           >
-            <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter">Engineered for Scale & Speed</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tighter font-mono">Engineered for Scale & Speed</h2>
             <div className="flex gap-4 items-start">
-              <div className="p-3 bg-white/5 rounded-xl"><Lock className="text-purple-400" size={24} /></div>
+              <div className="p-3 bg-white/5 rounded-xl shrink-0"><Lock className="text-purple-400" size={24} /></div>
               <div>
-                <h4 className="text-xl font-bold text-white mb-2">Isolated Live Rooms</h4>
-                <p className="text-gray-400 leading-relaxed">Protected by stateful WebSockets and room-scoped event dispatching. Workspaces maintain isolation and sub-millisecond sync.</p>
+                <h4 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2">Isolated Live Rooms</h4>
+                <p className="text-gray-400 text-sm sm:text-base leading-relaxed">Protected by stateful WebSockets and room-scoped event dispatching. Workspaces maintain isolation and sub-millisecond sync.</p>
               </div>
             </div>
             <div className="flex gap-4 items-start">
-              <div className="p-3 bg-white/5 rounded-xl"><Globe className="text-blue-400" size={24} /></div>
+              <div className="p-3 bg-white/5 rounded-xl shrink-0"><Globe className="text-blue-400" size={24} /></div>
               <div>
-                <h4 className="text-xl font-bold text-white mb-2">Immediate Access</h4>
-                <p className="text-gray-400 leading-relaxed">No credentials or passwords required. Browse the live projects, join interactive sessions, and view demo engineering profiles right away.</p>
+                <h4 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2">Immediate Access</h4>
+                <p className="text-gray-400 text-sm sm:text-base leading-relaxed">No credentials or passwords required. Browse the live projects, join interactive sessions, and view demo engineering profiles right away.</p>
               </div>
             </div>
           </motion.div>
@@ -179,12 +179,12 @@ const Home = () => {
             className="relative"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 blur-[100px] rounded-full"></div>
-            <div className="glass-panel p-8 rounded-3xl border border-white/10 relative z-10 flex items-center justify-center min-h-[300px]">
+            <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 relative z-10 flex items-center justify-center min-h-[260px] sm:min-h-[300px]">
                <div className="text-center">
-                 <div className="inline-block p-6 bg-black/50 rounded-full border border-white/10 mb-6">
-                   <Code2 size={48} className="text-cyan-400" />
+                 <div className="inline-block p-5 sm:p-6 bg-black/50 rounded-full border border-white/10 mb-5 sm:mb-6">
+                   <Code2 size={40} className="text-cyan-400 sm:w-12 sm:h-12" />
                  </div>
-                 <h3 className="text-2xl font-bold uppercase tracking-widest text-white">Cloud Architecture</h3>
+                 <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-widest text-white font-mono">Cloud Architecture</h3>
                </div>
             </div>
           </motion.div>
@@ -192,7 +192,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="w-full px-6 md:px-24 py-32 relative">
+      <section className="w-full px-4 sm:px-8 md:px-24 py-16 sm:py-24 md:py-32 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-900/20 z-0"></div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -200,13 +200,13 @@ const Home = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center relative z-10"
         >
-          <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-8">Stop Reading.<br/>Start Building.</h2>
-          <p className="text-xl text-gray-400 mb-12">Dive into active collaboration rooms or initialize a workspace.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/projects" className="bg-white text-black px-10 py-4 rounded-full text-sm uppercase tracking-widest font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-6 sm:mb-8 font-mono">Stop Reading.<br/>Start Building.</h2>
+          <p className="text-base sm:text-xl text-gray-400 mb-8 sm:mb-12">Dive into active collaboration rooms or initialize a workspace.</p>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full sm:w-auto max-w-md sm:max-w-none mx-auto">
+            <Link to="/projects" className="bg-white text-black px-8 sm:px-10 py-3.5 sm:py-4 rounded-full text-xs sm:text-sm uppercase tracking-widest font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2">
               Explore Live Rooms <ArrowRight size={16} />
             </Link>
-            <Link to="/create" className="glass-btn px-10 py-4 rounded-full text-sm uppercase tracking-widest font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2 text-white">
+            <Link to="/create" className="glass-btn px-8 sm:px-10 py-3.5 sm:py-4 rounded-full text-xs sm:text-sm uppercase tracking-widest font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2 text-white">
               Launch New Workspace <Code2 size={16} />
             </Link>
           </div>

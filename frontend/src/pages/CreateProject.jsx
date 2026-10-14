@@ -56,26 +56,26 @@ const CreateProject = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-transparent py-12 px-4 relative overflow-hidden font-sans">
+    <div className="min-h-[calc(100vh-80px)] bg-transparent py-8 sm:py-12 px-4 relative overflow-hidden font-sans">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/[0.02] rounded-full blur-[100px] pointer-events-none"></div>
       <div className="max-w-2xl mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10 text-center"
+          className="mb-8 sm:mb-10 text-center"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-4">
             <Sparkles size={13} /> Real-Time Collaboration
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-3">
             Initialize Workspace.
           </h1>
-          <p className="text-gray-400 text-base">
+          <p className="text-gray-400 text-sm sm:text-base">
             Spin up a containerized live editor with WebRTC voice and multi-cursor sync.
           </p>
         </motion.div>
 
-        <div className="glass-panel rounded-[2rem] p-6 sm:p-8 md:p-10 border border-white/10 shadow-2xl">
+        <div className="glass-panel rounded-2xl sm:rounded-[2rem] p-5 sm:p-8 md:p-10 border border-white/10 shadow-2xl">
           <div className="flex gap-2 mb-8">
             {[1, 2, 3, 4].map(i => (
               <div key={i} className={`h-1 flex-1 rounded-full ${step >= i ? 'bg-cyan-400' : 'bg-white/10'} transition-colors duration-500`}></div>
@@ -94,7 +94,7 @@ const CreateProject = () => {
                   value={title}
                   onChange={(e) => { setTitle(e.target.value); if (e.target.value) setStep(Math.max(step, 2)); }}
                   placeholder="e.g. Distributed Key-Value Store" 
-                  className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500/50 transition-colors"
+                  className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-base sm:text-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500/50 transition-colors"
                 />
               </div>
 
@@ -161,7 +161,7 @@ const CreateProject = () => {
               <button 
                 type="submit" 
                 disabled={loading || !title}
-                className="glass-btn flex items-center justify-center gap-2 px-8 py-3.5 text-white font-semibold text-sm disabled:opacity-50"
+                className="w-full sm:w-auto glass-btn flex items-center justify-center gap-2 px-8 py-3.5 text-white font-semibold text-sm disabled:opacity-50"
               >
                 {loading ? 'Initializing Container...' : 'Launch Workspace'} <ArrowRight size={16} />
               </button>

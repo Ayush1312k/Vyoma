@@ -296,29 +296,29 @@ const Profile = () => {
   );
 
   return (
-    <div className="container mx-auto px-6 py-8 max-w-6xl font-sans">
-      <div className="flex flex-col gap-12">
+    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-6xl font-sans">
+      <div className="flex flex-col gap-8 sm:gap-12">
         
         {/* Top Header & Actions */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-1">
+            <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-1">
               Personal Dev Profile
             </h1>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-xs sm:text-sm">
               Logged in as <strong className="text-white">Ayush Kumar</strong> • Permanent Primary Profile
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 w-full sm:w-auto">
             <button
               onClick={() => setIsEditing(true)}
-              className="glass-btn px-5 py-2.5 rounded-full text-white text-xs font-semibold uppercase tracking-wider flex items-center gap-2 hover:bg-white/10 transition-colors"
+              className="glass-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-white/10 transition-colors flex-1 sm:flex-initial"
             >
               Edit Details
             </button>
             <button
               onClick={toggleViewMode}
-              className="px-5 py-2.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-semibold uppercase tracking-wider hover:bg-amber-500/20 transition-colors"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-semibold uppercase tracking-wider hover:bg-amber-500/20 transition-colors flex-1 sm:flex-initial text-center"
             >
               Toggle {user?.accountType === 'employer' ? 'Dev' : 'Employer'} View
             </button>
@@ -326,8 +326,8 @@ const Profile = () => {
         </div>
 
         {/* 3D Carousel Section */}
-        <div className="relative w-full py-8 flex items-center justify-center min-h-[580px]">
-          <div className="relative w-[340px] sm:w-[380px] h-[520px]">
+        <div className="relative w-full py-6 sm:py-8 flex flex-col sm:flex-row items-center justify-center min-h-[540px] sm:min-h-[580px]">
+          <div className="relative w-[calc(100vw-3rem)] max-w-[340px] sm:w-[380px] h-[480px] sm:h-[520px]">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={currentCardIndex}
@@ -466,27 +466,43 @@ const Profile = () => {
               </motion.div>
             </AnimatePresence>
 
-            {/* Indicators */}
-            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
-              {[0, 1, 2, 3].map(i => (
-                <div key={i} className={`w-2 h-2 rounded-full transition-all ${currentCardIndex === i ? 'bg-white w-6' : 'bg-white/30'}`}></div>
-              ))}
+            {/* Indicators and mobile navigation buttons */}
+            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+              <button 
+                onClick={prevCard}
+                className="sm:hidden w-8 h-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white"
+                aria-label="Previous Card"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <div className="flex gap-2">
+                {[0, 1, 2, 3].map(i => (
+                  <div key={i} className={`h-2 rounded-full transition-all ${currentCardIndex === i ? 'bg-white w-6' : 'bg-white/30 w-2'}`}></div>
+                ))}
+              </div>
+              <button 
+                onClick={nextCard}
+                className="sm:hidden w-8 h-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white"
+                aria-label="Next Card"
+              >
+                <ChevronRight size={16} />
+              </button>
             </div>
           </div>
 
-          {/* Prev Button */}
+          {/* Prev Button (Desktop) */}
           <button 
             onClick={prevCard}
-            className="absolute left-4 md:left-12 lg:left-24 w-12 h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all cursor-pointer z-20"
+            className="hidden sm:flex absolute left-4 md:left-12 lg:left-24 w-12 h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-all cursor-pointer z-20"
             title="Previous Card"
           >
             <ChevronLeft size={24} />
           </button>
 
-          {/* Next Button */}
+          {/* Next Button (Desktop) */}
           <button 
             onClick={nextCard}
-            className="absolute right-4 md:right-12 lg:right-24 w-12 h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all cursor-pointer z-20"
+            className="hidden sm:flex absolute right-4 md:right-12 lg:right-24 w-12 h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-all cursor-pointer z-20"
             title="Next Card"
           >
             <ChevronRight size={24} />
@@ -494,39 +510,39 @@ const Profile = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {stats.map((stat, i) => (
             <motion.div 
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: i * 0.08 }}
-              className="p-6 rounded-3xl glass-panel border border-white/10 group"
+              className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl glass-panel border border-white/10 group"
             >
-              <div className="flex justify-between items-start mb-3">
-                <div className="p-2.5 bg-white/5 rounded-xl group-hover:scale-105 transition-transform">{stat.icon}</div>
+              <div className="flex justify-between items-start mb-2 sm:mb-3">
+                <div className="p-2 sm:p-2.5 bg-white/5 rounded-xl group-hover:scale-105 transition-transform">{stat.icon}</div>
                 <span className="text-[10px] font-semibold text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20">
                   {stat.trend}
                 </span>
               </div>
-              <div className="text-3xl font-bold mb-1 text-white">{stat.value}</div>
+              <div className="text-2xl sm:text-3xl font-bold mb-1 text-white">{stat.value}</div>
               <div className="text-xs text-gray-400">{stat.label}</div>
             </motion.div>
           ))}
         </div>
 
         {/* Active Live Rooms & Projects */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {/* Live Projects Card */}
-          <div className="p-8 rounded-3xl glass-panel border border-white/10 relative overflow-hidden">
+          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-white/10 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-600"></div>
-            <h2 className="text-xl font-semibold mb-6 flex items-center gap-2 text-white">
+            <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-white">
               <span className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
               Active in Workspace
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {profileData.liveProjects.map((proj, i) => (
-                <div key={i} className="p-4 bg-green-500/5 border border-green-500/20 rounded-2xl flex items-center justify-between">
+                <div key={i} className="p-3.5 sm:p-4 bg-green-500/5 border border-green-500/20 rounded-2xl flex items-center justify-between">
                   <div>
                     <div className="text-sm font-bold text-white flex items-center gap-2">
                       {proj.name}
@@ -544,15 +560,15 @@ const Profile = () => {
           </div>
 
           {/* Project History */}
-          <div className="p-8 rounded-3xl glass-panel border border-white/10 relative overflow-hidden">
+          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-white/10 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
-            <h2 className="text-xl font-semibold mb-6 flex items-center gap-2 text-white">
+            <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-white">
               <Activity size={20} className="text-cyan-400" />
               Completed Hall of Fame Credits
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {profileData.completedProjects.map((proj, i) => (
-                <div key={i} className="p-4 bg-white/5 border border-white/10 rounded-2xl">
+                <div key={i} className="p-3.5 sm:p-4 bg-white/5 border border-white/10 rounded-2xl">
                   <div className="flex items-center justify-between">
                     <div className="text-sm font-bold text-white">{proj.name}</div>
                     <span className="text-[10px] text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20">{proj.status}</span>
@@ -566,10 +582,10 @@ const Profile = () => {
         </div>
 
         {/* Find Collaborators Network */}
-        <div className="p-8 rounded-3xl glass-panel border border-white/10 relative overflow-hidden">
+        <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-white/10 relative overflow-hidden">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div>
-              <h2 className="text-xl font-semibold flex items-center gap-2 text-white">
+              <h2 className="text-lg sm:text-xl font-semibold flex items-center gap-2 text-white">
                 <Search size={20} className="text-cyan-400" /> Browse Network Profiles
               </h2>
               <p className="text-xs text-gray-400 mt-1">
@@ -633,10 +649,10 @@ const Profile = () => {
               initial={{ opacity: 0, scale: 0.95, y: 20 }} 
               animate={{ opacity: 1, scale: 1, y: 0 }} 
               exit={{ opacity: 0, scale: 0.95, y: 20 }} 
-              className="glass-panel border border-white/20 rounded-3xl p-6 sm:p-8 max-w-lg w-full relative z-10 shadow-2xl flex flex-col max-h-[90vh]"
+              className="glass-panel border border-white/20 rounded-2xl sm:rounded-3xl p-5 sm:p-8 max-w-lg w-[calc(100vw-2rem)] sm:w-full relative z-10 shadow-2xl flex flex-col max-h-[90vh]"
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold tracking-tight text-white">Edit Profile</h2>
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Edit Profile</h2>
                 <button type="button" onClick={() => setIsEditing(false)} className="p-2 text-gray-400 hover:text-white rounded-full">
                   <X size={18} />
                 </button>
@@ -663,7 +679,7 @@ const Profile = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-medium text-gray-400 mb-1">City</label>
                     <input 

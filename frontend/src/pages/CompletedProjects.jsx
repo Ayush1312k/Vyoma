@@ -155,7 +155,7 @@ const CompletedProjects = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent py-12 px-4 sm:px-6 lg:px-8 text-white relative overflow-hidden">
+    <div className="min-h-screen bg-transparent py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-white relative overflow-hidden font-sans">
       {/* Ambient background glows */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-green-500/[0.03] rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/[0.02] rounded-full blur-[100px] pointer-events-none"></div>
@@ -165,33 +165,33 @@ const CompletedProjects = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-16 text-center"
+          className="mb-10 sm:mb-16 text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-bold uppercase tracking-widest mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6">
             <CheckCircle size={14} /> Completed Ecosystem
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-4 sm:mb-6">
             Hall of Fame<span className="text-green-500">.</span>
           </h1>
-          <p className="text-white text-lg md:text-xl max-w-2xl mx-auto font-medium opacity-95">
+          <p className="text-white text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-medium opacity-95">
             Showcasing the most impactful projects built, deployed, and finalized with full team credits.
           </p>
           
           {/* Stats bar */}
           {projects.length > 0 && (
-            <div className="flex items-center justify-center gap-8 mt-8">
+            <div className="flex items-center justify-center gap-4 sm:gap-8 mt-6 sm:mt-8 flex-wrap">
               <div className="text-center">
                 <div className="text-2xl font-bold text-white">{projects.length}</div>
                 <div className="text-xs text-gray-500 uppercase tracking-widest">Projects</div>
               </div>
-              <div className="w-px h-8 bg-white/10"></div>
+              <div className="w-px h-8 bg-white/10 hidden sm:block"></div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-white">
                   {projects.reduce((acc, p) => acc + (p.contributors?.length || 0), 0)}
                 </div>
                 <div className="text-xs text-gray-500 uppercase tracking-widest">Contributors</div>
               </div>
-              <div className="w-px h-8 bg-white/10"></div>
+              <div className="w-px h-8 bg-white/10 hidden sm:block"></div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-white">
                   {projects.reduce((acc, p) => acc + (p.stack?.length || 0), 0)}
@@ -216,7 +216,7 @@ const CompletedProjects = () => {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
             {projects.map((project, idx) => (
               <motion.div
                 key={project.id}
@@ -226,7 +226,7 @@ const CompletedProjects = () => {
                 className="group"
               >
                 <TiltCard onClick={() => setSelectedProject(project)}>
-                  <div className="glass-panel rounded-[2.5rem] p-8 h-full border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] flex flex-col relative overflow-hidden min-h-[420px]">
+                  <div className="glass-panel rounded-2xl sm:rounded-[2.5rem] p-5 sm:p-8 h-full border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] flex flex-col relative overflow-hidden min-h-[380px] sm:min-h-[420px]">
                     {/* Header gradient line */}
                     <div className={`absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r ${gradients[idx % gradients.length]}`}></div>
                     
@@ -237,7 +237,7 @@ const CompletedProjects = () => {
                     <div className="flex justify-between items-start mb-6 relative z-10">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <h2 className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors uppercase tracking-tight truncate">
+                          <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-green-400 transition-colors uppercase tracking-tight truncate">
                             {project.title}
                           </h2>
                           {project.isDemo && (
@@ -258,7 +258,7 @@ const CompletedProjects = () => {
                           </p>
                         )}
                       </div>
-                      <div className="flex gap-2 shrink-0 ml-4">
+                      <div className="flex gap-2 shrink-0 ml-2 sm:ml-4">
                         {project.github && (
                           <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 rounded-xl hover:bg-white/10 border border-white/10 transition-all text-gray-400 hover:text-white hover:scale-105" title="GitHub Repo" onClick={(e) => e.stopPropagation()}>
                             <GithubIcon size={18} />
@@ -358,7 +358,7 @@ const CompletedProjects = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }} 
               exit={{ opacity: 0, scale: 0.9, y: 30 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="glass-panel rounded-3xl p-6 sm:p-8 max-w-2xl w-full relative z-10 shadow-[0_40px_80px_rgba(0,0,0,0.7)] max-h-[90vh] overflow-y-auto border border-white/20"
+              className="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 max-w-2xl w-[calc(100vw-2rem)] sm:w-full relative z-10 shadow-[0_40px_80px_rgba(0,0,0,0.7)] max-h-[90vh] overflow-y-auto border border-white/20"
             >
               {/* Close button */}
               <button onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors z-20 text-gray-400 hover:text-white">
@@ -366,11 +366,11 @@ const CompletedProjects = () => {
               </button>
 
               {/* Header gradient */}
-              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-400 via-cyan-400 to-blue-500 rounded-t-3xl"></div>
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-400 via-cyan-400 to-blue-500 rounded-t-2xl sm:rounded-t-3xl"></div>
               
               {/* Project Title */}
-              <div className="mb-8">
-                <div className="flex items-center gap-2 mb-3">
+              <div className="mb-6 sm:mb-8">
+                <div className="flex items-center gap-2 mb-3 flex-wrap">
                   <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 text-[10px] font-bold uppercase tracking-widest">
                     <CheckCircle size={10} className="inline mr-1" /> Completed Project
                   </span>
@@ -380,8 +380,8 @@ const CompletedProjects = () => {
                     </span>
                   )}
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight uppercase mb-2 text-white">{selectedProject.title}</h2>
-                <div className="flex items-center gap-4 text-sm text-gray-400">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight uppercase mb-2 text-white">{selectedProject.title}</h2>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-400">
                   <span className="flex items-center gap-1.5">
                     <Calendar size={14} /> 
                     {selectedProject.completedAt ? new Date(selectedProject.completedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Recently'}
@@ -397,28 +397,28 @@ const CompletedProjects = () => {
 
               {/* Links */}
               {(selectedProject.github || selectedProject.live) && (
-                <div className="flex flex-wrap gap-3 mb-8">
+                <div className="flex flex-wrap gap-2.5 sm:gap-3 mb-6 sm:mb-8">
                   {selectedProject.github && (
-                    <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2.5 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all text-gray-300 hover:text-white text-sm font-medium">
-                      <GithubIcon size={18} /> GitHub Repository <ExternalLink size={14} className="text-gray-500" />
+                    <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all text-gray-300 hover:text-white text-xs sm:text-sm font-medium">
+                      <GithubIcon size={16} /> GitHub Repository <ExternalLink size={13} className="text-gray-500" />
                     </a>
                   )}
                   {selectedProject.live && (
-                    <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2.5 bg-green-500/10 rounded-xl border border-green-500/20 hover:bg-green-500/20 transition-all text-green-400 text-sm font-medium">
-                      <Globe size={18} /> Live Demo <ExternalLink size={14} className="text-green-600" />
+                    <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-green-500/10 rounded-xl border border-green-500/20 hover:bg-green-500/20 transition-all text-green-400 text-xs sm:text-sm font-medium">
+                      <Globe size={16} /> Live Demo <ExternalLink size={13} className="text-green-600" />
                     </a>
                   )}
                 </div>
               )}
 
               {/* Tech Stack */}
-              <div className="mb-8">
+              <div className="mb-6 sm:mb-8">
                 <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                   <Layers size={14} /> Technologies
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {(selectedProject.stack || []).map(tech => (
-                    <span key={tech} className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-200 text-sm font-medium">
+                    <span key={tech} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-white/5 border border-white/10 text-gray-200 text-xs sm:text-sm font-medium">
                       {tech}
                     </span>
                   ))}
@@ -433,26 +433,28 @@ const CompletedProjects = () => {
                 <div className="space-y-3">
                   {selectedProject.contributors && selectedProject.contributors.length > 0 ? (
                     selectedProject.contributors.map((c, i) => (
-                      <div key={i} className="flex items-center gap-4 p-4 bg-white/[0.03] border border-white/[0.08] rounded-2xl hover:bg-white/[0.06] transition-colors">
-                        {c.avatar ? (
-                          <img src={c.avatar} alt={c.name} className="w-12 h-12 rounded-full object-cover border border-white/20 shadow-md shrink-0" />
-                        ) : (
-                          <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center text-sm font-bold text-white shadow-lg shrink-0`}>
-                            {getInitials(c.name)}
+                      <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 bg-white/[0.03] border border-white/[0.08] rounded-2xl hover:bg-white/[0.06] transition-colors">
+                        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                          {c.avatar ? (
+                            <img src={c.avatar} alt={c.name} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-white/20 shadow-md shrink-0" />
+                          ) : (
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center text-xs sm:text-sm font-bold text-white shadow-lg shrink-0`}>
+                              {getInitials(c.name)}
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-semibold text-white flex items-center gap-2">
+                              <span className="truncate">{c.name}</span>
+                              {c.isDemo && (
+                                <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-widest shrink-0">
+                                  demo
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-xs text-gray-400 truncate">{c.role}</div>
                           </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-semibold text-white flex items-center gap-2">
-                            <span>{c.name}</span>
-                            {c.isDemo && (
-                              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-widest">
-                                demo
-                              </span>
-                            )}
-                          </div>
-                          <div className="text-xs text-gray-400">{c.role}</div>
                         </div>
-                        <span className="text-[10px] px-2.5 py-1 rounded-full border border-green-500/20 bg-green-500/10 text-green-400 shrink-0 font-medium">
+                        <span className="text-[10px] px-2.5 py-1 rounded-full border border-green-500/20 bg-green-500/10 text-green-400 self-start sm:self-center shrink-0 font-medium">
                           ✓ Verified Credit
                         </span>
                       </div>

@@ -418,21 +418,29 @@ const ProfileCarouselModal = ({ profile, onClose }) => {
       }`} />
       <div className="absolute w-[350px] h-[350px] rounded-full blur-[120px] pointer-events-none opacity-30 bg-purple-500/25 -bottom-10 right-1/4" />
 
-      <div className="relative z-10 flex items-center gap-4 md:gap-8">
-        <button onClick={prev} className="w-12 h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all shrink-0"><ChevronLeft size={24} /></button>
-        <div className="relative w-[320px] h-[520px]">
+      <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 md:gap-8 max-w-full">
+        <button onClick={prev} className="hidden sm:flex w-11 h-11 sm:w-12 sm:h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-all shrink-0"><ChevronLeft size={22} /></button>
+        <div className="relative w-[calc(100vw-3rem)] max-w-[320px] sm:w-[320px] md:w-[360px] h-[480px] sm:h-[520px]">
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div key={cardIndex} custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 25 }} className="absolute inset-0">
               <TiltCard>{cards[cardIndex]}</TiltCard>
             </motion.div>
           </AnimatePresence>
-          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
-            {[0,1,2,3].map(i => <div key={i} className={`w-2 h-2 rounded-full transition-all ${cardIndex === i ? 'bg-white w-6' : 'bg-white/30'}`}></div>)}
+          <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+            <button onClick={prev} className="sm:hidden w-8 h-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white" aria-label="Previous card">
+              <ChevronLeft size={16} />
+            </button>
+            <div className="flex gap-2">
+              {[0,1,2,3].map(i => <div key={i} className={`h-2 rounded-full transition-all ${cardIndex === i ? 'bg-white w-6' : 'bg-white/30 w-2'}`}></div>)}
+            </div>
+            <button onClick={next} className="sm:hidden w-8 h-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white" aria-label="Next card">
+              <ChevronRight size={16} />
+            </button>
           </div>
         </div>
-        <button onClick={next} className="w-12 h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all shrink-0"><ChevronRight size={24} /></button>
+        <button onClick={next} className="hidden sm:flex w-11 h-11 sm:w-12 sm:h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-all shrink-0"><ChevronRight size={22} /></button>
       </div>
-      <button onClick={onClose} className="absolute top-6 right-6 p-3 bg-white/5 hover:bg-white/10 rounded-full transition-colors z-20 text-gray-400 hover:text-white backdrop-blur-lg border border-white/10"><X size={20} /></button>
+      <button onClick={onClose} className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 sm:p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-30 text-gray-400 hover:text-white backdrop-blur-lg border border-white/15"><X size={18} /></button>
     </div>
   );
 };
@@ -492,28 +500,28 @@ const Hire = () => {
   });
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-transparent py-12 px-4 sm:px-6 lg:px-8 text-white relative overflow-hidden font-sans">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-500/[0.03] rounded-full blur-[120px] pointer-events-none"></div>
+    <div className="min-h-[calc(100vh-80px)] bg-transparent py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-white relative overflow-hidden font-sans">
+      <div className="absolute top-0 right-0 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-amber-500/[0.03] rounded-full blur-[120px] pointer-events-none"></div>
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-widest mb-4">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-widest mb-3 sm:mb-4">
             <Users size={14} /> Open Talent Directory
           </div>
-          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight mb-3 sm:mb-4">
             Discover Talent & Recruiters<span className="text-amber-400">.</span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl">
             Browse verified developers, founders, and hiring directors. Click on any profile to explore interactive Dev Cards.
           </p>
         </motion.div>
 
         {/* Tab Switcher: All, Developers, Employers */}
-        <div className="flex gap-3 mb-8">
+        <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 mb-6 sm:mb-8 overflow-x-auto pb-1">
           <button
             onClick={() => setActiveTab('all')}
-            className={`px-5 py-2.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all ${
+            className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
               activeTab === 'all'
                 ? 'bg-white text-black shadow-lg'
                 : 'bg-white/5 text-gray-400 hover:text-white border border-white/10'
@@ -523,7 +531,7 @@ const Hire = () => {
           </button>
           <button
             onClick={() => setActiveTab('developer')}
-            className={`px-5 py-2.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${
+            className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'developer'
                 ? 'bg-cyan-500 text-black shadow-lg'
                 : 'bg-white/5 text-gray-400 hover:text-white border border-white/10'
@@ -533,7 +541,7 @@ const Hire = () => {
           </button>
           <button
             onClick={() => setActiveTab('employer')}
-            className={`px-5 py-2.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${
+            className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'employer'
                 ? 'bg-amber-400 text-black shadow-lg'
                 : 'bg-white/5 text-gray-400 hover:text-white border border-white/10'
@@ -544,7 +552,7 @@ const Hire = () => {
         </div>
 
         {/* Filter Bar */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-panel rounded-2xl p-6 mb-8">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-panel rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
           <div className="flex items-center gap-2 mb-4"><Filter size={18} className="text-amber-400" /><span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Filter Profiles</span></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
@@ -575,14 +583,14 @@ const Hire = () => {
         </div>
 
         {/* Profile Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredProfiles.map((profile, i) => (
             <motion.div
               key={profile.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.04 }}
-              className="glass-panel rounded-3xl p-6 border border-white/10 hover:border-white/25 transition-all group cursor-pointer relative overflow-hidden flex flex-col justify-between"
+              className="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-white/10 hover:border-white/25 transition-all group cursor-pointer relative overflow-hidden flex flex-col justify-between"
               onClick={() => setSelectedProfile(profile)}
             >
               {/* Header line */}

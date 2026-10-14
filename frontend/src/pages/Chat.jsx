@@ -91,7 +91,12 @@ const Chat = () => {
     } catch { return INITIAL_CONVERSATIONS; }
   });
 
-  const [activeChat, setActiveChat] = useState('demo-sarah');
+  const [activeChat, setActiveChat] = useState(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return null;
+    }
+    return 'demo-sarah';
+  });
   const [msgInput, setMsgInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [showNewChat, setShowNewChat] = useState(false);
@@ -203,7 +208,7 @@ const Chat = () => {
   const activeChatMessages = (conversations || {})[activeChat] || [];
 
   return (
-    <div className="h-[calc(100vh-80px)] flex bg-transparent text-white overflow-hidden relative font-sans">
+    <div className="h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] flex bg-transparent text-white overflow-hidden relative font-sans">
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/[0.03] rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/[0.02] rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -318,10 +323,10 @@ const Chat = () => {
             </div>
 
             {/* Messages Body */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-3">
+            <div className="flex-1 p-3 sm:p-4 overflow-y-auto space-y-3">
               {activeChatMessages.map(msg => (
                 <div key={msg.id} className={`flex flex-col ${msg.isMe ? 'items-end' : 'items-start'}`}>
-                  <div className={`px-4 py-2.5 rounded-2xl max-w-[80%] text-xs leading-relaxed ${
+                  <div className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl max-w-[85%] sm:max-w-[75%] text-xs leading-relaxed ${
                     msg.isMe 
                       ? 'bg-cyan-600 text-white rounded-br-none shadow-[0_0_15px_rgba(6,182,212,0.2)]' 
                       : 'bg-white/10 text-gray-100 rounded-bl-none border border-white/10'
@@ -352,7 +357,7 @@ const Chat = () => {
             </form>
           </>
         ) : (
-          <div className="flex-1 flex flex-col items-center justify-center text-gray-500">
+          <div className="flex-1 flex flex-col items-center justify-center text-gray-500 p-6 text-center">
             <MessageSquare size={48} className="mb-4 text-gray-700" />
             <p className="text-sm font-medium">Select a conversation to start chatting</p>
           </div>
@@ -364,7 +369,7 @@ const Chat = () => {
         {showNewChat && (
           <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowNewChat(false)} />
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-[#0a0a0d] border border-white/15 rounded-3xl p-6 w-full max-w-md relative z-10 shadow-2xl">
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-[#0a0a0d] border border-white/15 rounded-2xl sm:rounded-3xl p-5 sm:p-6 w-[calc(100vw-2rem)] max-w-md relative z-10 shadow-2xl">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-bold text-white">Start New Chat</h2>
                 <button onClick={() => setShowNewChat(false)} className="p-1.5 text-gray-400 hover:text-white rounded-full">
