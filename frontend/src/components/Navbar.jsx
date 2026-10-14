@@ -82,8 +82,8 @@ const Navbar = () => {
             to="/projects"
             className={`${islandClass} px-4 py-2 text-sm font-medium ${
               location.pathname === '/projects'
-                ? 'text-white border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                : 'text-gray-300 hover:text-white hover:border-white/40'
+                ? 'glass-pill-active text-white'
+                : 'text-gray-200 hover:text-white'
             }`}
           >
             Live Rooms
@@ -93,8 +93,8 @@ const Navbar = () => {
             to="/hall-of-fame"
             className={`${islandClass} px-4 py-2 text-sm font-medium flex items-center gap-1.5 ${
               location.pathname === '/hall-of-fame'
-                ? 'text-white border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                : 'text-gray-300 hover:text-white hover:border-white/40'
+                ? 'glass-pill-active text-white'
+                : 'text-gray-200 hover:text-white'
             }`}
           >
             <Award size={15} /> Hall of Fame
@@ -104,8 +104,8 @@ const Navbar = () => {
             to="/create"
             className={`${islandClass} px-4 py-2 text-sm font-medium flex items-center gap-1.5 ${
               location.pathname === '/create'
-                ? 'text-white border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                : 'text-gray-300 hover:text-white hover:border-white/40'
+                ? 'glass-pill-active text-white'
+                : 'text-gray-200 hover:text-white'
             }`}
           >
             <Code2 size={15} /> Workspace
@@ -115,8 +115,8 @@ const Navbar = () => {
             to="/hire"
             className={`${islandClass} px-4 py-2 text-sm font-medium flex items-center gap-1.5 ${
               location.pathname === '/hire'
-                ? 'text-white border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                : 'text-gray-300 hover:text-white hover:border-white/40'
+                ? 'glass-pill-active text-white'
+                : 'text-gray-200 hover:text-white'
             }`}
           >
             {isEmployer ? <Briefcase size={15} /> : <Users size={15} />}
@@ -127,8 +127,8 @@ const Navbar = () => {
             to="/chat"
             className={`${islandClass} px-3.5 py-2 ${
               location.pathname === '/chat'
-                ? 'text-white border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                : 'text-gray-300 hover:text-white hover:border-white/40'
+                ? 'glass-pill-active text-white'
+                : 'text-gray-200 hover:text-white'
             }`}
             title="Messages"
           >
@@ -177,7 +177,7 @@ const Navbar = () => {
                   initial={{ opacity: 0, y: 15, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 15, scale: 0.95 }}
-                  className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-72 bg-[#12141d]/95 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden z-50 pointer-events-auto flex flex-col max-h-[400px]"
+                  className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-72 bg-[#0a0d14]/90 backdrop-blur-2xl border border-white/20 border-t-white/50 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.7),inset_0_1px_2px_rgba(255,255,255,0.4)] overflow-hidden z-50 pointer-events-auto flex flex-col max-h-[400px]"
                 >
                   <div className="p-4 border-b border-white/10 bg-white/[0.04] shrink-0">
                     <h3 className="text-xs font-bold text-white uppercase tracking-widest">Notifications</h3>
@@ -243,7 +243,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 12, scale: 0.96 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                  className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-80 bg-[#0e1017]/95 backdrop-blur-2xl border border-white/15 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.7)] overflow-hidden z-50 pointer-events-auto max-h-[calc(100vh-100px)] overflow-y-auto"
+                  className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-80 bg-[#0a0d14]/90 backdrop-blur-2xl border border-white/20 border-t-white/50 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.7),inset_0_1px_2px_rgba(255,255,255,0.4)] overflow-hidden z-50 pointer-events-auto max-h-[calc(100vh-100px)] overflow-y-auto"
                 >
                   {/* User Profile Card Header */}
                   <div className="p-4 border-b border-white/10 bg-white/[0.03]">
@@ -384,7 +384,7 @@ const Navbar = () => {
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: -20, opacity: 0, scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              className="relative z-10 w-full max-w-sm mx-auto bg-[#12141d]/95 backdrop-blur-2xl border border-white/20 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] max-h-[calc(100vh-100px)] overflow-y-auto"
+              className="relative z-10 w-full max-w-sm mx-auto bg-[#0a0d14]/90 backdrop-blur-2xl border border-white/20 border-t-white/50 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7),inset_0_1px_2px_rgba(255,255,255,0.4)] max-h-[calc(100vh-100px)] overflow-y-auto"
             >
               <div className="p-4 flex flex-col gap-2">
                 {/* Mobile View Toggle */}
