@@ -59,79 +59,79 @@ const Navbar = () => {
       <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none flex justify-center px-2.5 sm:px-4">
         <nav
           aria-label="Main navigation"
-          className={`pointer-events-auto trioptus-nav-bar ${
-            scrolled ? 'scrolled mt-2 sm:mt-2.5 py-1 px-3 sm:px-5' : 'mt-3 sm:mt-4 py-1.5 px-3.5 sm:px-6'
+          className={`pointer-events-auto apple-liquid-nav apple-nav-font ${
+            scrolled ? 'scrolled mt-2 sm:mt-2.5 py-1.5 px-3 sm:px-5' : 'mt-3 sm:mt-4 py-2 px-3.5 sm:px-6'
           } flex items-center justify-between gap-3 sm:gap-6 mx-auto`}
         >
-          {/* Left: Brand with Cyan Glow Dot (Direct Match to Screenshot) */}
-          <Link to="/" className="flex items-center gap-2 sm:gap-2.5 py-1 group shrink-0">
+          {/* Left: Brand with Cyan Glow Dot — "Vyoma" (TriOptus removed) */}
+          <Link to="/" className="flex items-center gap-2.5 py-1 group shrink-0">
             <span className="logo-dot-cyan" title="Live Ecosystem" />
             <div className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center relative">
               <img 
                 src="/logo-mark-cyan.png" 
                 alt="Vyoma Logo" 
-                className="w-full h-full object-contain filter drop-shadow-[0_0_6px_rgba(34,211,238,0.7)] group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(14,165,233,0.4)] group-hover:scale-105 transition-transform duration-300"
               />
             </div>
-            <span className="text-sm sm:text-base font-extrabold italic tracking-tight text-[#0f172a] group-hover:text-[#0284c7] transition-colors font-sans">
-              TriOptus Vyoma
+            <span className="text-sm sm:text-base font-bold tracking-tight text-[#0f172a] group-hover:text-[#0284c7] transition-colors apple-nav-font">
+              Vyoma
             </span>
           </Link>
 
-          {/* Center: Desktop Navigation Links (Uppercase Dark Text Links matching Screenshot) */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* Center: Desktop Navigation Links (Apple Liquid Glass Pills for each menu) */}
+          <div className="hidden lg:flex items-center gap-1.5 xl:gap-2">
             <Link
               to="/"
-              className={`trioptus-nav-item ${location.pathname === '/' ? 'active' : ''}`}
+              className={`apple-liquid-pill ${location.pathname === '/' ? 'active' : ''}`}
             >
               Home
             </Link>
 
             <Link
               to="/projects"
-              className={`trioptus-nav-item ${location.pathname === '/projects' ? 'active' : ''}`}
+              className={`apple-liquid-pill ${location.pathname === '/projects' ? 'active' : ''}`}
             >
               Live Rooms
             </Link>
 
             <Link
               to="/hall-of-fame"
-              className={`trioptus-nav-item ${location.pathname === '/hall-of-fame' ? 'active' : ''}`}
+              className={`apple-liquid-pill ${location.pathname === '/hall-of-fame' ? 'active' : ''}`}
             >
               Hall of Fame
             </Link>
 
             <Link
               to="/create"
-              className={`trioptus-nav-item ${location.pathname === '/create' ? 'active' : ''}`}
+              className={`apple-liquid-pill ${location.pathname === '/create' ? 'active' : ''}`}
             >
               Workspace
             </Link>
 
             <Link
               to="/chat"
-              className={`trioptus-nav-item ${location.pathname === '/chat' ? 'active' : ''}`}
+              className={`apple-liquid-pill ${location.pathname === '/chat' ? 'active' : ''}`}
             >
               Messages
             </Link>
           </div>
 
-          {/* Right: 3D Frosted White Capsule Buttons (Matching Screenshot CONTACT US and TRIOPTUS Pills) */}
+          {/* Right: Apple Liquid Glass Action Pills */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             {/* View Switcher Capsule Button */}
             <button
               onClick={toggleViewMode}
-              className="btn-nav-white hidden md:inline-flex"
+              className="apple-liquid-pill hidden md:inline-flex"
               title="Toggle between Developer and Employer perspective"
             >
-              <ArrowLeftRight size={11} className="text-[#0284c7]" />
+              <ArrowLeftRight size={12} className="text-[#0284c7]" />
               <span>View: {isEmployer ? 'Employer' : 'Developer'}</span>
             </button>
 
             {/* Talent / Hire CTA Capsule Button */}
             <Link
               to="/hire"
-              className="btn-nav-white hidden sm:inline-flex"
+              className={`apple-liquid-pill hidden sm:inline-flex ${location.pathname === '/hire' ? 'active' : ''}`}
             >
               {isEmployer ? 'Hire Talent' : 'Talent Network'}
             </Link>
@@ -140,12 +140,13 @@ const Navbar = () => {
             <div className="relative">
               <button 
                 onClick={() => { setNotifOpen(!notifOpen); setMenuOpen(false); if (!notifOpen) handleReadNotifications(); }}
-                className="btn-nav-white !p-2 !px-2.5 rounded-full relative flex items-center justify-center"
+                className="apple-liquid-pill !w-9 !h-9 !p-0 rounded-full relative flex items-center justify-center"
                 title="Notifications"
+                aria-label="Notifications"
               >
                 <Bell size={15} className="text-[#0f172a]" />
                 {notifications.filter(n => !n.read).length > 0 && (
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-[#0284c7] rounded-full animate-pulse"></span>
+                  <span className="absolute top-2 right-2 w-2 h-2 bg-[#0284c7] rounded-full animate-pulse"></span>
                 )}
               </button>
               <AnimatePresence>
@@ -186,7 +187,7 @@ const Navbar = () => {
                 onClick={() => { setMenuOpen(!menuOpen); setNotifOpen(false); setMobileMenuOpen(false); }}
                 aria-label="User menu"
                 aria-expanded={menuOpen}
-                className="btn-nav-white !py-1 !pl-1.5 !pr-2.5 rounded-full flex items-center gap-1.5"
+                className="apple-liquid-pill !py-1 !pl-1.5 !pr-3 rounded-full flex items-center gap-2"
               >
                 <div className="w-6 h-6 rounded-full overflow-hidden border border-slate-300 shadow-inner shrink-0">
                   {(user?.profile_photo || '/ayush_profile.jpg') ? (
@@ -197,10 +198,10 @@ const Navbar = () => {
                     </div>
                   )}
                 </div>
-                <span className="hidden sm:inline text-xs font-bold text-[#0f172a]">
+                <span className="hidden sm:inline text-xs font-semibold text-[#0f172a]">
                   {user?.name?.split(' ')[0] || 'Ayush'}
                 </span>
-                <ChevronDown size={13} className={`text-slate-500 transition-transform ${menuOpen ? 'rotate-180 text-[#0284c7]' : ''}`} />
+                <ChevronDown size={13} className={`text-slate-500 transition-transform duration-200 ${menuOpen ? 'rotate-180 text-[#0284c7]' : ''}`} />
               </button>
 
               <AnimatePresence>
@@ -337,7 +338,7 @@ const Navbar = () => {
               onClick={() => { setMobileMenuOpen(!mobileMenuOpen); setMenuOpen(false); setNotifOpen(false); }} 
               aria-label="Toggle menu" 
               aria-expanded={mobileMenuOpen} 
-              className="btn-nav-white lg:hidden !p-2 rounded-full flex items-center justify-center"
+              className="apple-liquid-pill lg:hidden !w-9 !h-9 !p-0 rounded-full flex items-center justify-center"
             >
               {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
             </button>
@@ -362,7 +363,7 @@ const Navbar = () => {
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: -20, opacity: 0, scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              className="relative z-10 w-full max-w-sm mx-auto bg-white/95 backdrop-blur-2xl border border-white/80 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.18)] max-h-[calc(100vh-100px)] overflow-y-auto p-4 flex flex-col gap-2"
+              className="relative z-10 w-full max-w-sm mx-auto bg-white/95 backdrop-blur-3xl border border-white/80 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.18)] max-h-[calc(100vh-100px)] overflow-y-auto p-4 flex flex-col gap-2 apple-nav-font"
             >
               {/* Mobile View Toggle */}
               <button
@@ -370,7 +371,7 @@ const Navbar = () => {
                   toggleViewMode();
                   setMobileMenuOpen(false);
                 }}
-                className="btn-nav-white w-full py-2.5 text-xs font-bold text-[#0f172a] rounded-2xl text-center flex items-center justify-center gap-2 border border-slate-200"
+                className="apple-liquid-pill w-full py-2.5 text-xs font-semibold text-[#0f172a] text-center flex items-center justify-center gap-2"
               >
                 <ArrowLeftRight size={14} className="text-[#0284c7]" />
                 Switch to {isEmployer ? 'Developer' : 'Employer'} View
@@ -379,8 +380,8 @@ const Navbar = () => {
               <Link 
                 to="/" 
                 onClick={() => setMobileMenuOpen(false)}
-                className={`btn-nav-white w-full py-2 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center ${
-                  location.pathname === '/' ? '!text-[#0284c7] !border-[#0284c7]/40' : ''
+                className={`apple-liquid-pill w-full py-2.5 text-center flex items-center justify-center ${
+                  location.pathname === '/' ? 'active' : ''
                 }`}
               >
                 Home
@@ -388,8 +389,8 @@ const Navbar = () => {
               <Link 
                 to="/projects" 
                 onClick={() => setMobileMenuOpen(false)}
-                className={`btn-nav-white w-full py-2 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 ${
-                  location.pathname === '/projects' ? '!text-[#0284c7] !border-[#0284c7]/40' : ''
+                className={`apple-liquid-pill w-full py-2.5 text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/projects' ? 'active' : ''
                 }`}
               >
                 <Code2 size={14} className="text-[#0284c7]" /> Live Rooms
@@ -397,8 +398,8 @@ const Navbar = () => {
               <Link 
                 to="/hall-of-fame" 
                 onClick={() => setMobileMenuOpen(false)}
-                className={`btn-nav-white w-full py-2 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 ${
-                  location.pathname === '/hall-of-fame' ? '!text-[#0284c7] !border-[#0284c7]/40' : ''
+                className={`apple-liquid-pill w-full py-2.5 text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/hall-of-fame' ? 'active' : ''
                 }`}
               >
                 <Award size={14} className="text-amber-500" /> Hall of Fame
@@ -406,8 +407,8 @@ const Navbar = () => {
               <Link 
                 to="/create" 
                 onClick={() => setMobileMenuOpen(false)}
-                className={`btn-nav-white w-full py-2 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 ${
-                  location.pathname === '/create' ? '!text-[#0284c7] !border-[#0284c7]/40' : ''
+                className={`apple-liquid-pill w-full py-2.5 text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/create' ? 'active' : ''
                 }`}
               >
                 <Code2 size={14} className="text-purple-600" /> Workspace
@@ -415,8 +416,8 @@ const Navbar = () => {
               <Link 
                 to="/hire" 
                 onClick={() => setMobileMenuOpen(false)}
-                className={`btn-nav-white w-full py-2 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 ${
-                  location.pathname === '/hire' ? '!text-[#0284c7] !border-[#0284c7]/40' : ''
+                className={`apple-liquid-pill w-full py-2.5 text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/hire' ? 'active' : ''
                 }`}
               >
                 {isEmployer ? <Briefcase size={14} className="text-amber-600" /> : <Users size={14} className="text-amber-600" />}
@@ -425,8 +426,8 @@ const Navbar = () => {
               <Link 
                 to="/chat" 
                 onClick={() => setMobileMenuOpen(false)}
-                className={`btn-nav-white w-full py-2 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 ${
-                  location.pathname === '/chat' ? '!text-[#0284c7] !border-[#0284c7]/40' : ''
+                className={`apple-liquid-pill w-full py-2.5 text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/chat' ? 'active' : ''
                 }`}
               >
                 <MessageSquare size={14} className="text-emerald-600" /> Messages
@@ -434,8 +435,8 @@ const Navbar = () => {
               <Link 
                 to="/profile" 
                 onClick={() => setMobileMenuOpen(false)}
-                className={`btn-nav-white w-full py-2 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 ${
-                  location.pathname === '/profile' ? '!text-[#0284c7] !border-[#0284c7]/40' : ''
+                className={`apple-liquid-pill w-full py-2.5 text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/profile' ? 'active' : ''
                 }`}
               >
                 <User size={14} className="text-[#0284c7]" /> My Profile
