@@ -9,10 +9,13 @@
   --trioptus-blue: #1d4ed8;
   --trioptus-cyan: #0ea5e9;
   --trioptus-mint: #10b981;
-  --glow-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.7), 
-                 0 8px 16px -4px rgba(0, 0, 0, 0.5);
-  --glow-shadow-hover: 0 28px 56px -10px rgba(0, 0, 0, 0.8), 
-                       0 12px 24px -4px rgba(0, 0, 0, 0.6);
+  /* Floating-water shadows, adapted from the supplied TriOptus reference. */
+  --glow-shadow: 0 20px 50px -10px rgba(14, 165, 233, 0.22),
+                 0 10px 20px -5px rgba(16, 185, 129, 0.12),
+                 0 16px 40px -18px rgba(0, 0, 0, 0.7);
+  --glow-shadow-hover: 0 30px 70px -15px rgba(14, 165, 233, 0.36),
+                       0 16px 30px -10px rgba(16, 185, 129, 0.2),
+                       0 24px 52px -20px rgba(0, 0, 0, 0.85);
 }
 html {
   overflow-x: hidden;
@@ -64,18 +67,18 @@ body {
 }
 /* TriOptus 3D Frosted Glass Architecture */
 :root {
-  --glass-bg: rgba(12, 16, 26, 0.93);
-  --glass-border-top: rgba(255, 255, 255, 0.35);
-  --glass-border-left: rgba(255, 255, 255, 0.2);
-  --glass-border-right: rgba(0, 0, 0, 0.45);
-  --glass-border-bottom: rgba(0, 0, 0, 0.75);
+  --glass-bg: rgba(12, 20, 34, 0.5);
+  --glass-border-top: rgba(255, 255, 255, 0.5);
+  --glass-border-left: rgba(186, 230, 253, 0.32);
+  --glass-border-right: rgba(14, 165, 233, 0.22);
+  --glass-border-bottom: rgba(2, 6, 23, 0.72);
 }
 
 .glass-panel {
   background: var(--glass-bg);
-  background-image: linear-gradient(165deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 45%, rgba(0, 0, 0, 0.28) 100%);
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.17) 0%, rgba(186, 230, 253, 0.07) 42%, rgba(15, 23, 42, 0.33) 100%);
+  backdrop-filter: blur(25px) saturate(145%);
+  -webkit-backdrop-filter: blur(25px) saturate(145%);
   border-style: solid !important;
   border-width: 1.5px 1.5px 2.5px 1.5px !important;
   border-top-color: var(--glass-border-top) !important;
@@ -83,10 +86,9 @@ body {
   border-right-color: var(--glass-border-right) !important;
   border-bottom-color: var(--glass-border-bottom) !important;
   box-shadow: 
-    0 20px 45px -8px rgba(0, 0, 0, 0.75), 
-    0 8px 18px -4px rgba(0, 0, 0, 0.5),
+    var(--glow-shadow),
     inset 0 1.5px 1.5px rgba(255, 255, 255, 0.22),
-    inset 0 -2.5px 4px rgba(0, 0, 0, 0.55) !important;
+    inset 0 -2.5px 4px rgba(2, 6, 23, 0.35) !important;
   position: relative;
   overflow: hidden;
   transform: translateZ(0); /* Hardware acceleration */
@@ -94,19 +96,31 @@ body {
 }
 
 .glass-panel:hover {
-  background: rgba(15, 20, 32, 0.96);
-  background-image: linear-gradient(165deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0.32) 100%);
-  transform: translateY(-4px) translateZ(0);
-  border-top-color: rgba(255, 255, 255, 0.5) !important;
-  border-left-color: rgba(255, 255, 255, 0.28) !important;
-  border-right-color: rgba(0, 0, 0, 0.55) !important;
-  border-bottom-color: rgba(0, 0, 0, 0.85) !important;
+  background: rgba(18, 32, 52, 0.62);
+  background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.24) 0%, rgba(125, 211, 252, 0.12) 42%, rgba(15, 23, 42, 0.3) 100%);
+  transform: translateY(-8px) scale(1.01) translateZ(0);
+  border-top-color: rgba(255, 255, 255, 0.68) !important;
+  border-left-color: rgba(186, 230, 253, 0.5) !important;
+  border-right-color: rgba(14, 165, 233, 0.36) !important;
+  border-bottom-color: rgba(2, 6, 23, 0.82) !important;
   box-shadow: 
-    0 28px 56px -10px rgba(0, 0, 0, 0.85),
-    0 12px 24px -4px rgba(0, 0, 0, 0.6),
-    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.32),
-    inset 0 -2.5px 4px rgba(0, 0, 0, 0.65) !important;
+    var(--glow-shadow-hover),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.35),
+    inset 0 -2.5px 4px rgba(2, 6, 23, 0.45) !important;
 }
+
+/* A soft refraction line makes panels read as real glass over the ambient orbs. */
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.16), transparent 28%, transparent 72%, rgba(16, 185, 129, 0.08));
+  opacity: 0.8;
+}
+
+.glass-panel > * { position: relative; z-index: 1; }
 
 /* Global Torch Effect — TriOptus Cyan & Emerald Aura */
 .global-torch {
