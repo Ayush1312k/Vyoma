@@ -59,81 +59,90 @@ const Navbar = () => {
       <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none flex justify-center px-2.5 sm:px-4">
         <nav
           aria-label="Main navigation"
-          className={`pointer-events-auto trioptus-nav-island ${scrolled ? 'scrolled mt-2 sm:mt-2.5 py-1.5 px-3 sm:px-5' : 'mt-3 sm:mt-4 py-2 px-3 sm:px-6'} flex items-center justify-between w-full max-w-[1360px]`}
+          className={`pointer-events-auto trioptus-nav-island ${scrolled ? 'scrolled mt-2 sm:mt-2.5 py-1.5 px-2.5 sm:px-4' : 'mt-3 sm:mt-4 py-2 px-3 sm:px-5'} flex items-center justify-between w-full max-w-[1360px] gap-2`}
         >
-          {/* Left: Logo Island with TriOptus Pulsing Dot */}
-          <Link to="/" className="flex items-center gap-2 sm:gap-2.5 py-1 group shrink-0">
+          {/* Left: Logo Frosted Glass Pill */}
+          <Link to="/" className="glass-pill flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1.5 group shrink-0">
             <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center relative">
               <img 
                 src="/logo-mark-cyan.png" 
                 alt="Vyoma Logo" 
-                className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(34,211,238,0.6)] group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(34,211,238,0.7)] group-hover:scale-105 transition-transform duration-300"
               />
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-base sm:text-lg font-bold tracking-wider text-white group-hover:text-cyan-400 transition-colors uppercase font-sans">
+              <span className="text-sm sm:text-base font-bold tracking-wider text-white group-hover:text-cyan-400 transition-colors uppercase font-sans">
                 VYOMA
               </span>
               <span className="logo-dot" title="Live Ecosystem" />
             </div>
           </Link>
 
-          {/* Center: Desktop Navigation Links (TriOptus Animated Underline Menu) */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* Center: Frosted Glass Menu Pills (TriOptus 3D Frosted Effect) */}
+          <div className="hidden lg:flex items-center gap-2">
             <Link
               to="/projects"
-              className={`trioptus-nav-link ${location.pathname === '/projects' ? 'active' : ''}`}
+              className={`glass-pill px-3.5 py-1.5 text-xs font-semibold tracking-wide flex items-center gap-1.5 ${
+                location.pathname === '/projects' ? 'glass-pill-active' : ''
+              }`}
             >
-              <Code2 size={15} className="text-cyan-400" />
+              <Code2 size={14} className="text-cyan-400" />
               <span>Live Rooms</span>
             </Link>
 
             <Link
               to="/hall-of-fame"
-              className={`trioptus-nav-link ${location.pathname === '/hall-of-fame' ? 'active' : ''}`}
+              className={`glass-pill px-3.5 py-1.5 text-xs font-semibold tracking-wide flex items-center gap-1.5 ${
+                location.pathname === '/hall-of-fame' ? 'glass-pill-active' : ''
+              }`}
             >
-              <Award size={15} className="text-yellow-400" />
+              <Award size={14} className="text-yellow-400" />
               <span>Hall of Fame</span>
             </Link>
 
             <Link
               to="/create"
-              className={`trioptus-nav-link ${location.pathname === '/create' ? 'active' : ''}`}
+              className={`glass-pill px-3.5 py-1.5 text-xs font-semibold tracking-wide flex items-center gap-1.5 ${
+                location.pathname === '/create' ? 'glass-pill-active' : ''
+              }`}
             >
-              <Code2 size={15} className="text-purple-400" />
+              <Code2 size={14} className="text-purple-400" />
               <span>Workspace</span>
             </Link>
 
             <Link
               to="/hire"
-              className={`trioptus-nav-link ${location.pathname === '/hire' ? 'active' : ''}`}
+              className={`glass-pill px-3.5 py-1.5 text-xs font-semibold tracking-wide flex items-center gap-1.5 ${
+                location.pathname === '/hire' ? 'glass-pill-active' : ''
+              }`}
             >
-              {isEmployer ? <Briefcase size={15} className="text-amber-400" /> : <Users size={15} className="text-amber-400" />}
+              {isEmployer ? <Briefcase size={14} className="text-amber-400" /> : <Users size={14} className="text-amber-400" />}
               <span>{isEmployer ? 'Hire Talent' : 'Talent Network'}</span>
             </Link>
 
             <Link
               to="/chat"
-              className={`trioptus-nav-link ${location.pathname === '/chat' ? 'active' : ''}`}
+              className={`glass-pill px-3 py-1.5 flex items-center justify-center ${
+                location.pathname === '/chat' ? 'glass-pill-active' : ''
+              }`}
               title="Messages"
             >
-              <MessageSquare size={16} className="text-emerald-400" />
-              <span>Messages</span>
+              <MessageSquare size={15} className="text-emerald-400" />
             </Link>
           </div>
 
           {/* Right: Actions, View Mode Switcher & Profile */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-            {/* View Mode Switcher (TriOptus Capsule Style) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* View Mode Switcher */}
             <button
               onClick={toggleViewMode}
-              className="btn-nav-trioptus hidden md:inline-flex"
+              className="glass-pill px-3 py-1.5 gap-2 text-xs font-semibold hidden md:inline-flex items-center group"
               title="Toggle between Developer and Employer perspective"
             >
               <div className={`w-4 h-4 rounded-full flex items-center justify-center transition-all ${
                 isEmployer ? 'bg-amber-500/30 text-amber-300' : 'bg-cyan-500/30 text-cyan-300'
               }`}>
-                <ArrowLeftRight size={10} className="hover:rotate-180 transition-transform duration-300" />
+                <ArrowLeftRight size={10} className="group-hover:rotate-180 transition-transform duration-300" />
               </div>
               <span className="text-gray-300 text-[11px] font-normal">View:</span>
               <span className={`text-xs font-semibold ${isEmployer ? 'text-amber-300' : 'text-cyan-300'}`}>
@@ -145,10 +154,10 @@ const Navbar = () => {
             <div className="relative">
               <button 
                 onClick={() => { setNotifOpen(!notifOpen); setMenuOpen(false); if (!notifOpen) handleReadNotifications(); }}
-                className="p-1.5 sm:p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition-colors relative"
+                className="glass-pill p-2 text-gray-300 hover:text-white rounded-full transition-colors relative flex items-center justify-center"
                 title="Notifications"
               >
-                <Bell size={17} />
+                <Bell size={16} />
                 {notifications.filter(n => !n.read).length > 0 && (
                   <span className="absolute top-1 sm:top-1.5 right-1 sm:right-1.5 w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(14,165,233,1)]"></span>
                 )}
@@ -159,7 +168,7 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: 15, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 15, scale: 0.95 }}
-                    className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-72 bg-[#0a0d14]/90 backdrop-blur-2xl border border-white/20 border-t-white/50 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.7),inset_0_1px_2px_rgba(255,255,255,0.4)] overflow-hidden z-50 flex flex-col max-h-[400px]"
+                    className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-72 bg-[#0b101c]/95 backdrop-blur-2xl border border-white/20 border-t-white/60 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.8),inset_0_1.5px_2px_rgba(255,255,255,0.5)] overflow-hidden z-50 flex flex-col max-h-[400px]"
                   >
                     <div className="p-4 border-b border-white/10 bg-white/[0.04] shrink-0">
                       <h3 className="text-xs font-bold text-white uppercase tracking-widest">Notifications</h3>
@@ -191,13 +200,13 @@ const Navbar = () => {
                 onClick={() => { setMenuOpen(!menuOpen); setNotifOpen(false); setMobileMenuOpen(false); }}
                 aria-label="User menu"
                 aria-expanded={menuOpen}
-                className="flex items-center gap-1 sm:gap-2 pr-1.5 sm:pr-2.5 pl-1 py-1 rounded-full hover:bg-white/10 transition-colors border border-white/10 hover:border-white/20"
+                className="glass-pill flex items-center gap-1.5 sm:gap-2 pr-2.5 sm:pr-3 pl-1.5 py-1 rounded-full text-gray-200"
               >
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-white/20 shadow-inner shrink-0">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full overflow-hidden border border-white/30 shadow-inner shrink-0">
                   {(user?.profile_photo || '/ayush_profile.jpg') ? (
                     <img src={user?.profile_photo || '/ayush_profile.jpg'} alt="Profile" className="w-full h-full object-cover object-top" />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-xs font-bold text-white">
+                    <div className="w-full h-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-[10px] font-bold text-white">
                       {getInitials(user?.name)}
                     </div>
                   )}
@@ -205,7 +214,7 @@ const Navbar = () => {
                 <span className="hidden sm:inline text-xs font-semibold text-gray-200">
                   {user?.name?.split(' ')[0] || 'Ayush'}
                 </span>
-                <ChevronDown size={14} className={`text-gray-300 transition-transform ${menuOpen ? 'rotate-180 text-white' : ''}`} />
+                <ChevronDown size={13} className={`text-gray-300 transition-transform ${menuOpen ? 'rotate-180 text-white' : ''}`} />
               </button>
 
               <AnimatePresence>
@@ -215,7 +224,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 12, scale: 0.96 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                    className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-80 bg-[#0a0d14]/90 backdrop-blur-2xl border border-white/20 border-t-white/50 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.7),inset_0_1px_2px_rgba(255,255,255,0.4)] overflow-hidden z-50 max-h-[calc(100vh-100px)] overflow-y-auto"
+                    className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-80 bg-[#0b101c]/95 backdrop-blur-2xl border border-white/20 border-t-white/60 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.8),inset_0_1.5px_2px_rgba(255,255,255,0.5)] overflow-hidden z-50 max-h-[calc(100vh-100px)] overflow-y-auto"
                   >
                     {/* User Profile Card Header */}
                     <div className="p-4 border-b border-white/10 bg-white/[0.03]">
@@ -342,9 +351,9 @@ const Navbar = () => {
               onClick={() => { setMobileMenuOpen(!mobileMenuOpen); setMenuOpen(false); setNotifOpen(false); }} 
               aria-label="Toggle menu" 
               aria-expanded={mobileMenuOpen} 
-              className="lg:hidden p-1.5 sm:p-2 rounded-full hover:bg-white/10 text-white transition-colors"
+              className="glass-pill lg:hidden p-2 rounded-full text-white transition-colors flex items-center justify-center"
             >
-              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+              {mobileMenuOpen ? <X size={17} /> : <Menu size={17} />}
             </button>
           </div>
         </nav>
@@ -353,86 +362,98 @@ const Navbar = () => {
       {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 z-40 flex flex-col justify-start pt-16 sm:pt-20 px-4">
+          <div className="lg:hidden fixed inset-0 z-40 flex flex-col justify-start pt-20 px-4">
             {/* Backdrop to close */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/70 backdrop-blur-md"
             />
             <motion.div
               initial={{ y: -20, opacity: 0, scale: 0.95 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: -20, opacity: 0, scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              className="relative z-10 w-full max-w-sm mx-auto bg-[#0a0d14]/90 backdrop-blur-2xl border border-white/20 border-t-white/50 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7),inset_0_1px_2px_rgba(255,255,255,0.4)] max-h-[calc(100vh-100px)] overflow-y-auto"
+              className="relative z-10 w-full max-w-sm mx-auto bg-[#0b101c]/95 backdrop-blur-2xl border border-white/20 border-t-white/60 rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.8),inset_0_1.5px_2px_rgba(255,255,255,0.5)] max-h-[calc(100vh-100px)] overflow-y-auto p-4 flex flex-col gap-2"
             >
-              <div className="p-4 flex flex-col gap-2">
-                {/* Mobile View Toggle */}
-                <button
-                  onClick={() => {
-                    toggleViewMode();
-                    setMobileMenuOpen(false);
-                  }}
-                  className="px-4 py-3 text-xs font-semibold text-white rounded-2xl text-center bg-amber-500/20 border border-amber-500/30 flex items-center justify-center gap-2"
-                >
-                  <ArrowLeftRight size={14} />
-                  Switch to {isEmployer ? 'Developer' : 'Employer'} View
-                </button>
+              {/* Mobile View Toggle */}
+              <button
+                onClick={() => {
+                  toggleViewMode();
+                  setMobileMenuOpen(false);
+                }}
+                className="glass-pill px-4 py-2.5 text-xs font-semibold text-white rounded-2xl text-center bg-amber-500/20 border-amber-500/40 flex items-center justify-center gap-2"
+              >
+                <ArrowLeftRight size={14} />
+                Switch to {isEmployer ? 'Developer' : 'Employer'} View
+              </button>
 
-                <Link 
-                  to="/" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium text-white rounded-2xl text-center bg-white/5 hover:bg-white/10 transition-colors"
-                >
-                  Home
-                </Link>
-                <Link 
-                  to="/projects" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium text-white rounded-2xl text-center bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
-                >
-                  <Code2 size={15} className="text-cyan-400" /> Live Rooms
-                </Link>
-                <Link 
-                  to="/hall-of-fame" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium text-white rounded-2xl text-center bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
-                >
-                  <Award size={15} className="text-yellow-400" /> Hall of Fame
-                </Link>
-                <Link 
-                  to="/create" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium text-white rounded-2xl text-center bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
-                >
-                  <Code2 size={15} className="text-purple-400" /> Workspace
-                </Link>
-                <Link 
-                  to="/hire" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium text-white rounded-2xl text-center bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
-                >
-                  {isEmployer ? <Briefcase size={15} className="text-amber-400" /> : <Users size={15} className="text-amber-400" />}
-                  {isEmployer ? 'Hire Talent' : 'Talent Network'}
-                </Link>
-                <Link 
-                  to="/chat" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium text-white rounded-2xl text-center bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
-                >
-                  <MessageSquare size={15} className="text-emerald-400" /> Messages
-                </Link>
-                <Link 
-                  to="/profile" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium text-white rounded-2xl text-center bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
-                >
-                  <User size={15} className="text-cyan-400" /> My Profile
-                </Link>
-              </div>
+              <Link 
+                to="/" 
+                onClick={() => setMobileMenuOpen(false)}
+                className={`glass-pill px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white text-center ${
+                  location.pathname === '/' ? 'glass-pill-active' : ''
+                }`}
+              >
+                Home
+              </Link>
+              <Link 
+                to="/projects" 
+                onClick={() => setMobileMenuOpen(false)}
+                className={`glass-pill px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/projects' ? 'glass-pill-active' : ''
+                }`}
+              >
+                <Code2 size={14} className="text-cyan-400" /> Live Rooms
+              </Link>
+              <Link 
+                to="/hall-of-fame" 
+                onClick={() => setMobileMenuOpen(false)}
+                className={`glass-pill px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/hall-of-fame' ? 'glass-pill-active' : ''
+                }`}
+              >
+                <Award size={14} className="text-yellow-400" /> Hall of Fame
+              </Link>
+              <Link 
+                to="/create" 
+                onClick={() => setMobileMenuOpen(false)}
+                className={`glass-pill px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/create' ? 'glass-pill-active' : ''
+                }`}
+              >
+                <Code2 size={14} className="text-purple-400" /> Workspace
+              </Link>
+              <Link 
+                to="/hire" 
+                onClick={() => setMobileMenuOpen(false)}
+                className={`glass-pill px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/hire' ? 'glass-pill-active' : ''
+                }`}
+              >
+                {isEmployer ? <Briefcase size={14} className="text-amber-400" /> : <Users size={14} className="text-amber-400" />}
+                {isEmployer ? 'Hire Talent' : 'Talent Network'}
+              </Link>
+              <Link 
+                to="/chat" 
+                onClick={() => setMobileMenuOpen(false)}
+                className={`glass-pill px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/chat' ? 'glass-pill-active' : ''
+                }`}
+              >
+                <MessageSquare size={14} className="text-emerald-400" /> Messages
+              </Link>
+              <Link 
+                to="/profile" 
+                onClick={() => setMobileMenuOpen(false)}
+                className={`glass-pill px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white text-center flex items-center justify-center gap-2 ${
+                  location.pathname === '/profile' ? 'glass-pill-active' : ''
+                }`}
+              >
+                <User size={14} className="text-cyan-400" /> My Profile
+              </Link>
             </motion.div>
           </div>
         )}
