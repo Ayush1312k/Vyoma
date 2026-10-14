@@ -1,9 +1,18 @@
 @import "tailwindcss";
 :root {
-  --bg-color: #1a1c24;
+  --bg-color: #07090e;
   --text-color: #ffffff;
   --accent-grey: #444444;
   --light-grey: #b3b3b3;
+
+  /* TriOptus Brand Glassmorphism Palette & Floating Water Glow */
+  --trioptus-blue: #1d4ed8;
+  --trioptus-cyan: #0ea5e9;
+  --trioptus-mint: #10b981;
+  --glow-shadow: 0 20px 50px -10px rgba(29, 78, 216, 0.22), 
+                 0 10px 20px -5px rgba(16, 185, 129, 0.12);
+  --glow-shadow-hover: 0 30px 70px -12px rgba(29, 78, 216, 0.38), 
+                       0 15px 30px -6px rgba(16, 185, 129, 0.22);
 }
 html {
   overflow-x: hidden;
@@ -20,10 +29,12 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 .glass-panel-legacy {
-  background: rgba(35, 35, 35, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.28);
+  box-shadow: var(--glow-shadow);
 }
 .hover-glow:hover {
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
@@ -43,32 +54,49 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-/* Clean minimal style with glass effect */
+/* TriOptus Floating Water Glassmorphism */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-top: rgba(255, 255, 255, 0.28);
 }
 
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(24px) saturate(150%);
-  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-top: 1.5px solid var(--glass-border-top);
+  box-shadow: 
+    var(--glow-shadow),
+    0 16px 36px rgba(0, 0, 0, 0.45), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
   position: relative;
   overflow: hidden;
   transform: translateZ(0); /* Hardware acceleration */
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
 }
 
-/* Torch light surface glow */
+.glass-panel:hover {
+  background: rgba(255, 255, 255, 0.065);
+  border-color: rgba(14, 165, 233, 0.35);
+  border-top-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 
+    var(--glow-shadow-hover),
+    0 24px 50px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* TriOptus Water Surface Spot Glow */
 .glass-panel::before {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 0.06),
-    transparent 40%
+    700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(14, 165, 233, 0.09) 0%,
+    rgba(16, 185, 129, 0.04) 40%,
+    transparent 70%
   );
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -76,25 +104,27 @@ body {
   z-index: 1;
 }
 
-/* Torch light border glow */
+/* TriOptus Colored Glowing Edge Border Glow */
 .glass-panel::after {
   content: "";
   position: absolute;
-  inset: -1px; /* Cover the border */
+  inset: -1px; /* Cover border */
   border-radius: inherit;
-  padding: 1px; /* Width of the glowing border */
+  padding: 1.5px; /* Width of glowing border */
   background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 0.5),
-    transparent 40%
+    550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(56, 189, 248, 0.85) 0%,
+    rgba(29, 78, 216, 0.65) 25%,
+    rgba(16, 185, 129, 0.5) 50%,
+    transparent 75%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#a5a5a5 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 1;
+  transition: opacity 0.45s ease;
+  z-index: 2;
 }
 
 .glass-panel:hover::before,
@@ -102,7 +132,7 @@ body {
   opacity: 1;
 }
 
-/* Global Torch Effect */
+/* Global Torch Effect — TriOptus Cyan & Emerald Aura */
 .global-torch {
   position: fixed;
   top: 0;
@@ -113,13 +143,14 @@ body {
   z-index: 9999;
   background: radial-gradient(
     800px circle at var(--global-mouse-x, 50vw) var(--global-mouse-y, 50vh),
-    rgba(255, 255, 255, 0.03),
-    transparent 40%
+    rgba(14, 165, 233, 0.04) 0%,
+    rgba(16, 185, 129, 0.02) 40%,
+    transparent 70%
   );
   will-change: background;
 }
 
-/* Optimized Backgrounds (No filter: blur) */
+/* TriOptus Ambient Depth Blobs */
 .bg-blobs {
   position: fixed;
   top: 0;
@@ -128,7 +159,7 @@ body {
   height: 100vh;
   z-index: -1;
   overflow: hidden;
-  background: #1a1c24;
+  background: #080b11;
   transform: translateZ(0);
 }
 
@@ -136,11 +167,11 @@ body {
   position: absolute;
   top: -20%;
   left: -10%;
-  width: 70vw;
-  height: 70vw;
-  background: radial-gradient(circle, rgba(0, 210, 255, 0.25) 0%, transparent 60%);
+  width: 75vw;
+  height: 75vw;
+  background: radial-gradient(circle, rgba(29, 78, 216, 0.22) 0%, transparent 65%);
   border-radius: 50%;
-  animation: blob-float 20s infinite alternate ease-in-out;
+  animation: blob-float 22s infinite alternate ease-in-out;
   will-change: transform;
 }
 
@@ -150,21 +181,21 @@ body {
   right: -10%;
   width: 80vw;
   height: 80vw;
-  background: radial-gradient(circle, rgba(112, 0, 255, 0.22) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 65%);
   border-radius: 50%;
-  animation: blob-float 25s infinite alternate-reverse ease-in-out;
+  animation: blob-float 26s infinite alternate-reverse ease-in-out;
   will-change: transform;
 }
 
 .blob-3 {
   position: absolute;
-  top: 30%;
-  left: 40%;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(255, 0, 128, 0.18) 0%, transparent 60%);
+  top: 35%;
+  left: 35%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 60%);
   border-radius: 50%;
-  animation: blob-float 18s infinite alternate ease-in-out;
+  animation: blob-float 20s infinite alternate ease-in-out;
   will-change: transform;
 }
 
@@ -173,35 +204,34 @@ body {
   100% { transform: translate3d(8%, 8%, 0) scale(1.1) rotate(5deg); }
 }
 
-/* 3D Translucent Pill Menu */
+/* 3D Translucent Pill Menu — TriOptus Water Capsule Style */
 .glass-pill {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.32);
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 9999px;
   box-shadow: 
-    0 4px 14px rgba(0, 0, 0, 0.35),
-    0 1px 2px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 6px 20px rgba(0, 0, 0, 0.35),
+    0 0 20px -5px rgba(29, 78, 216, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
     inset 0 -1px 0 rgba(0, 0, 0, 0.3);
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
   position: relative;
 }
 
 .glass-pill:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.22);
-  border-top-color: rgba(255, 255, 255, 0.35);
-  border-bottom-color: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(14, 165, 233, 0.35);
+  border-top-color: rgba(255, 255, 255, 0.45);
   box-shadow: 
-    0 8px 22px rgba(0, 0, 0, 0.45),
-    0 2px 4px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+    0 10px 28px rgba(0, 0, 0, 0.45),
+    0 0 30px -5px rgba(29, 78, 216, 0.35),
+    0 0 15px -3px rgba(16, 185, 129, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
 }
 
@@ -214,35 +244,47 @@ body {
 
 .glass-pill-active {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgba(14, 165, 233, 0.45);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.5);
   border-radius: 9999px;
   box-shadow: 
-    0 6px 18px rgba(0, 0, 0, 0.4),
-    0 0 15px rgba(6, 182, 212, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transition: all 0.25s ease;
-}
-/* Glass Button — same as glass-panel but for buttons, with rounded-2xl */
-.glass-btn {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(24px) saturate(150%);
-  -webkit-backdrop-filter: blur(24px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 8px 25px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(14, 165, 233, 0.35),
+    0 0 15px rgba(16, 185, 129, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transition: all 0.3s ease;
+}
+
+/* Glass Button — TriOptus Water Capsule Style */
+.glass-btn {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.2), 
+    0 0 20px -5px rgba(29, 78, 216, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
+  color: white;
+  position: relative;
+  overflow: hidden;
 }
 
 .glass-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(14, 165, 233, 0.45);
+  border-top-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 
+    0 8px 30px -5px rgba(29, 78, 216, 0.45), 
+    0 4px 15px -2px rgba(16, 185, 129, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
 }
 
 .glass-btn:active {

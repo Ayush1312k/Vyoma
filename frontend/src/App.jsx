@@ -26,9 +26,18 @@ function AppContent() {
       animationFrameId = requestAnimationFrame(() => {
         document.documentElement.style.setProperty('--global-mouse-x', `${e.clientX}px`);
         document.documentElement.style.setProperty('--global-mouse-y', `${e.clientY}px`);
+
+        const glassTarget = e.target?.closest ? e.target.closest('.glass-panel, .glass-btn, .glass-pill') : null;
+        if (glassTarget) {
+          const rect = glassTarget.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          glassTarget.style.setProperty('--mouse-x', `${x}px`);
+          glassTarget.style.setProperty('--mouse-y', `${y}px`);
+        }
       });
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
