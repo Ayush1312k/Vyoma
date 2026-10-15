@@ -27,7 +27,7 @@ function AppContent() {
         document.documentElement.style.setProperty('--global-mouse-x', `${e.clientX}px`);
         document.documentElement.style.setProperty('--global-mouse-y', `${e.clientY}px`);
 
-        const glassTarget = e.target?.closest ? e.target.closest('.glass-panel, .glass-btn, .glass-pill') : null;
+        const glassTarget = e.target?.closest ? e.target.closest('.glass-panel, .glass-btn, .glass-pill, .card-3d, .btn-3d, .pill-3d') : null;
         if (glassTarget) {
           const rect = glassTarget.getBoundingClientRect();
           const x = e.clientX - rect.left;

@@ -470,7 +470,7 @@ const Profile = () => {
             <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
               <button 
                 onClick={prevCard}
-                className="sm:hidden w-8 h-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white"
+                className="sm:hidden w-8 h-8 bg-[#141a28] border border-white/15 border-t-white/30 border-b-black shadow-[0_4px_12px_rgba(0,0,0,0.6)] rounded-full flex items-center justify-center text-white"
                 aria-label="Previous Card"
               >
                 <ChevronLeft size={16} />
@@ -482,7 +482,7 @@ const Profile = () => {
               </div>
               <button 
                 onClick={nextCard}
-                className="sm:hidden w-8 h-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white"
+                className="sm:hidden w-8 h-8 bg-[#141a28] border border-white/15 border-t-white/30 border-b-black shadow-[0_4px_12px_rgba(0,0,0,0.6)] rounded-full flex items-center justify-center text-white"
                 aria-label="Next Card"
               >
                 <ChevronRight size={16} />
@@ -493,7 +493,7 @@ const Profile = () => {
           {/* Prev Button (Desktop) */}
           <button 
             onClick={prevCard}
-            className="hidden sm:flex absolute left-4 md:left-12 lg:left-24 w-12 h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-all cursor-pointer z-20"
+            className="hidden sm:flex absolute left-4 md:left-12 lg:left-24 w-12 h-12 bg-[#141a28] border border-white/15 border-t-white/30 border-b-black shadow-[0_4px_12px_rgba(0,0,0,0.6)] rounded-full items-center justify-center text-white hover:bg-cyan-500 hover:text-black hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all cursor-pointer z-20"
             title="Previous Card"
           >
             <ChevronLeft size={24} />
@@ -502,7 +502,7 @@ const Profile = () => {
           {/* Next Button (Desktop) */}
           <button 
             onClick={nextCard}
-            className="hidden sm:flex absolute right-4 md:right-12 lg:right-24 w-12 h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-all cursor-pointer z-20"
+            className="hidden sm:flex absolute right-4 md:right-12 lg:right-24 w-12 h-12 bg-[#141a28] border border-white/15 border-t-white/30 border-b-black shadow-[0_4px_12px_rgba(0,0,0,0.6)] rounded-full items-center justify-center text-white hover:bg-cyan-500 hover:text-black hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all cursor-pointer z-20"
             title="Next Card"
           >
             <ChevronRight size={24} />
@@ -641,7 +641,7 @@ const Profile = () => {
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }} 
-              className="absolute inset-0 bg-[#0f1117]/65 backdrop-blur-2xl" 
+              className="absolute inset-0 bg-[#070a12]/85" 
               onClick={() => setIsEditing(false)} 
             />
             <div className="absolute w-[400px] h-[400px] rounded-full blur-[140px] pointer-events-none opacity-30 bg-cyan-500/25" />

@@ -463,7 +463,7 @@ const Room = () => {
         return <style key={socketId}>{`.cursor-${socketId}::after { content: "${safeName}"; }`}</style>;
       })}
       {/* Icon sidebar */}
-      <div className="w-12 border-r border-gray-900 flex flex-col items-center py-4 gap-4 bg-black/40 backdrop-blur-md shrink-0 z-40">
+      <div className="w-12 border-r border-gray-900 flex flex-col items-center py-4 gap-4 bg-[#0b0f19] shrink-0 z-40 shadow-lg">
         <button onClick={() => { setSidebarTab('files'); setSidebarOpen(sidebarTab === 'files' ? !sidebarOpen : true); }} className={`p-2 rounded-lg transition-colors ${sidebarTab === 'files' && sidebarOpen ? 'bg-white text-black' : 'text-gray-500 hover:text-white'}`} title="Explorer"><FileText size={20} /></button>
         <button onClick={() => { setSidebarTab('chat'); setSidebarOpen(sidebarTab === 'chat' ? !sidebarOpen : true); }} className={`p-2 rounded-lg transition-colors ${sidebarTab === 'chat' && sidebarOpen ? 'bg-white text-black' : 'text-gray-500 hover:text-white'}`} title="Chat"><MessageSquare size={20} /></button>
         <button onClick={() => { setSidebarTab('github'); setSidebarOpen(sidebarTab === 'github' ? !sidebarOpen : true); }} className={`p-2 rounded-lg transition-colors ${sidebarTab === 'github' && sidebarOpen ? 'bg-white text-black' : 'text-gray-500 hover:text-white'}`} title="GitHub"><GithubIcon size={20} /></button>
@@ -478,10 +478,10 @@ const Room = () => {
           <>
             {/* Mobile backdrop */}
             <div 
-              className="fixed inset-0 z-30 bg-black/60 backdrop-blur-xs md:hidden"
+              className="fixed inset-0 z-30 bg-black/80 md:hidden"
               onClick={() => setSidebarOpen(false)}
             />
-            <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: 240, opacity: 1 }} exit={{ width: 0, opacity: 0 }} transition={{ duration: 0.15 }} className="absolute left-12 md:static z-40 h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] border-r border-gray-900 bg-black/90 md:bg-black/60 backdrop-blur-xl overflow-hidden shrink-0 flex flex-col shadow-2xl md:shadow-none">
+            <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: 240, opacity: 1 }} exit={{ width: 0, opacity: 0 }} transition={{ duration: 0.15 }} className="absolute left-12 md:static z-40 h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] border-r border-white/10 bg-[#0c101b] overflow-hidden shrink-0 flex flex-col shadow-2xl md:shadow-none">
               {sidebarTab === 'files' && <FileExplorer files={files} activeFile={activeFile} onSelect={(f) => { openFile(f); if (typeof window !== 'undefined' && window.innerWidth < 768) setSidebarOpen(false); }} onDelete={deleteFile} onCreate={createFile} />}
               {sidebarTab === 'chat' && (
                 <div className="flex flex-col h-full">
@@ -495,7 +495,7 @@ const Room = () => {
                     ))}
                     <div ref={chatEndRef} />
                   </div>
-                  <form onSubmit={handleSendMessage} className="flex gap-1.5 p-2 border-t border-gray-900 bg-black/40 backdrop-blur-md shrink-0">
+                  <form onSubmit={handleSendMessage} className="flex gap-1.5 p-2 border-t border-gray-900 bg-[#090d16] shrink-0">
                     <input type="text" value={msgInput} onChange={e => setMsgInput(e.target.value)} placeholder="Message..." className="flex-1 bg-[#111] border border-gray-800 rounded-full px-3 py-1.5 text-xs text-white focus:outline-none" />
                     <button type="submit" className="w-7 h-7 bg-white text-black rounded-full flex items-center justify-center shrink-0"><Send size={12} /></button>
                   </form>
@@ -509,7 +509,7 @@ const Room = () => {
       {/* Main workspace */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="h-auto min-h-[44px] py-1.5 md:py-0 border-b border-gray-900 flex items-center justify-between px-3 sm:px-4 bg-black/40 backdrop-blur-md shrink-0 gap-2">
+        <header className="h-auto min-h-[44px] py-1.5 md:py-0 border-b border-white/10 flex items-center justify-between px-3 sm:px-4 bg-[#0d121e] shrink-0 gap-2 shadow-md">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <button onClick={() => navigate('/projects')} className="p-1.5 hover:bg-white/5 rounded-full transition-colors shrink-0">
               <ArrowLeft size={16} className="text-gray-400" />
@@ -652,8 +652,8 @@ const Room = () => {
       <AnimatePresence>
         {showCredits && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowCredits(false)} />
-            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80" onClick={() => setShowCredits(false)} />
+            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className="glass-panel rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold flex items-center gap-2"><Award size={20} className="text-purple-400" /> Project Credits</h2>
                 <button onClick={() => setShowCredits(false)} className="p-2 hover:bg-white/10 rounded-full"><X size={18} /></button>
@@ -709,8 +709,8 @@ const Room = () => {
       <AnimatePresence>
         {showCompleteModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowCompleteModal(false)} />
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 w-full max-w-md relative z-10 shadow-2xl">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80" onClick={() => setShowCompleteModal(false)} />
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="glass-panel rounded-3xl p-8 w-full max-w-md relative z-10 shadow-2xl">
               <h2 className="text-2xl font-bold mb-2">Complete Project</h2>
               <p className="text-sm text-gray-400 mb-6">Celebrate your success! Add links to your work and it will be showcased in the Completed Projects gallery.</p>
               

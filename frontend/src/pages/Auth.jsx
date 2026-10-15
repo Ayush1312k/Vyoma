@@ -89,7 +89,7 @@ const Auth = () => {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="w-full max-w-md relative z-10"
       >
-        <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 shadow-2xl backdrop-blur-xl">
+        <div className="glass-panel rounded-3xl p-8 shadow-2xl">
           <div className="flex flex-col items-center mb-6 text-center">
             <img src="/logo-mark-cyan.png" alt="Vyoma Logo" className="w-12 h-12 object-contain filter drop-shadow-[0_0_12px_rgba(34,211,238,0.5)] mb-2" />
             <h1 className="text-xl font-bold tracking-widest uppercase text-white font-sans">VYOMA</h1>

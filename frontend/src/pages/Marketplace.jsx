@@ -20,7 +20,7 @@ const PaymentModal = ({ listing, onClose, onPay }) => {
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80" onClick={onClose} />
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -431,7 +431,7 @@ const Marketplace = () => {
       <AnimatePresence>
         {showCreateModal && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowCreateModal(false)} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80" onClick={() => setShowCreateModal(false)} />
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-lg relative z-10 overflow-hidden shadow-2xl">
               <div className="p-6 border-b border-white/10 flex justify-between items-center bg-black/40">
                 <h3 className="text-xl font-bold">List Project for Sale/Auction</h3>
@@ -495,7 +495,7 @@ const Marketplace = () => {
       <AnimatePresence>
         {bidModalListing && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => { setBidModalListing(null); setBidAmount(''); }} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80" onClick={() => { setBidModalListing(null); setBidAmount(''); }} />
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="glass-panel border border-white/10 rounded-2xl w-full max-w-sm relative z-10 overflow-hidden shadow-2xl bg-[#111]">
               <div className="p-6 border-b border-white/10 bg-black/40">
                 <h3 className="text-lg font-bold text-white">Place a Bid</h3>

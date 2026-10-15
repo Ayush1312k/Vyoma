@@ -73,7 +73,7 @@ const Navbar = () => {
                 className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(14,165,233,0.4)] group-hover:scale-105 transition-transform duration-300"
               />
             </div>
-            <span className="text-sm sm:text-base font-bold tracking-tight text-[#0f172a] group-hover:text-[#0284c7] transition-colors apple-nav-font">
+            <span className="text-sm sm:text-base font-bold tracking-tight text-white group-hover:text-cyan-400 transition-colors apple-nav-font">
               Vyoma
             </span>
           </Link>
@@ -124,7 +124,7 @@ const Navbar = () => {
               className="apple-liquid-pill hidden md:inline-flex"
               title="Toggle between Developer and Employer perspective"
             >
-              <ArrowLeftRight size={12} className="text-[#0284c7]" />
+              <ArrowLeftRight size={12} className="text-[#38bdf8]" />
               <span>View: {isEmployer ? 'Employer' : 'Developer'}</span>
             </button>
 
@@ -144,7 +144,7 @@ const Navbar = () => {
                 title="Notifications"
                 aria-label="Notifications"
               >
-                <Bell size={15} className="text-[#0f172a]" />
+                <Bell size={15} className="text-gray-200" />
                 {notifications.filter(n => !n.read).length > 0 && (
                   <span className="absolute top-2 right-2 w-2 h-2 bg-[#0284c7] rounded-full animate-pulse"></span>
                 )}
@@ -155,21 +155,21 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: 15, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 15, scale: 0.95 }}
-                    className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-72 bg-white/95 backdrop-blur-2xl border border-white/80 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.18)] overflow-hidden z-50 flex flex-col max-h-[400px] text-slate-800"
+                    className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-72 bg-[#0c101b] border border-white/15 border-t-white/30 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden z-50 flex flex-col max-h-[400px] text-white"
                   >
-                    <div className="p-4 border-b border-slate-200/80 bg-slate-50/80 shrink-0">
-                      <h3 className="text-xs font-bold text-[#0f172a] uppercase tracking-widest">Notifications</h3>
+                    <div className="p-4 border-b border-white/10 bg-white/[0.03] shrink-0">
+                      <h3 className="text-xs font-bold text-white uppercase tracking-widest">Notifications</h3>
                     </div>
                     <div className="overflow-y-auto p-2">
                       {notifications.length === 0 ? (
-                        <div className="text-center p-4 text-xs text-slate-500">
+                        <div className="text-center p-4 text-xs text-gray-400">
                           Welcome to Vyoma! You are logged in as Ayush Kumar.
                         </div>
                       ) : (
                         notifications.map(n => (
-                          <div key={n.id} className={`p-3 rounded-2xl mb-1 ${!n.read ? 'bg-sky-50' : ''}`}>
-                            <p className="text-xs text-slate-700">{n.message}</p>
-                            <span className="text-[10px] text-slate-400 mt-1 block">
+                          <div key={n.id} className={`p-3 rounded-2xl mb-1 border border-white/5 ${!n.read ? 'bg-cyan-500/10 border-cyan-500/20' : 'bg-white/[0.03]'}`}>
+                            <p className="text-xs text-gray-200">{n.message}</p>
+                            <span className="text-[10px] text-gray-400 mt-1 block">
                               {new Date(n.createdAt).toLocaleDateString()}
                             </span>
                           </div>
@@ -198,10 +198,10 @@ const Navbar = () => {
                     </div>
                   )}
                 </div>
-                <span className="hidden sm:inline text-xs font-semibold text-[#0f172a]">
+                <span className="hidden sm:inline text-xs font-semibold text-gray-200">
                   {user?.name?.split(' ')[0] || 'Ayush'}
                 </span>
-                <ChevronDown size={13} className={`text-slate-500 transition-transform duration-200 ${menuOpen ? 'rotate-180 text-[#0284c7]' : ''}`} />
+                <ChevronDown size={13} className={`text-slate-400 transition-transform duration-200 ${menuOpen ? 'rotate-180 text-cyan-400' : ''}`} />
               </button>
 
               <AnimatePresence>
@@ -211,7 +211,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 12, scale: 0.96 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                    className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-80 bg-white/95 backdrop-blur-2xl border border-white/80 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.18)] overflow-hidden z-50 max-h-[calc(100vh-100px)] overflow-y-auto text-slate-800"
+                    className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-xs sm:w-80 bg-[#0c101b] border border-white/15 border-t-white/30 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden z-50 max-h-[calc(100vh-100px)] overflow-y-auto text-white"
                   >
                     {/* User Profile Card Header */}
                     <div className="p-4 border-b border-white/10 bg-white/[0.03]">
@@ -356,14 +356,14 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/80"
             />
             <motion.div
               initial={{ y: -20, opacity: 0, scale: 0.95 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: -20, opacity: 0, scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              className="relative z-10 w-full max-w-sm mx-auto bg-white/95 backdrop-blur-3xl border border-white/80 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.18)] max-h-[calc(100vh-100px)] overflow-y-auto p-4 flex flex-col gap-2 apple-nav-font"
+              className="relative z-10 w-full max-w-sm mx-auto bg-[#0c101b] border border-white/15 border-t-white/30 rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9)] max-h-[calc(100vh-100px)] overflow-y-auto p-4 flex flex-col gap-2 apple-nav-font text-white"
             >
               {/* Mobile View Toggle */}
               <button
@@ -371,7 +371,7 @@ const Navbar = () => {
                   toggleViewMode();
                   setMobileMenuOpen(false);
                 }}
-                className="apple-liquid-pill w-full py-2.5 text-xs font-semibold text-[#0f172a] text-center flex items-center justify-center gap-2"
+                className="apple-liquid-pill w-full py-2.5 text-xs font-semibold text-white text-center flex items-center justify-center gap-2"
               >
                 <ArrowLeftRight size={14} className="text-[#0284c7]" />
                 Switch to {isEmployer ? 'Developer' : 'Employer'} View

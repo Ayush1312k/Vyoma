@@ -6,8 +6,8 @@ export default function SettingsModal({ settings, onSave, onClose }) {
   const handleSave = () => { onSave(s); onClose(); };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
-      <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 max-w-lg w-full relative z-10 shadow-2xl max-h-[80vh] overflow-auto">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80" onClick={onClose} />
+      <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} className="glass-panel rounded-2xl p-6 max-w-lg w-full relative z-10 shadow-2xl max-h-[80vh] overflow-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold">Room Settings</h2>
           <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full"><X size={18} className="text-gray-400" /></button>

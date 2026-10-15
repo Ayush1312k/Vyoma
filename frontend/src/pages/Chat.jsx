@@ -213,7 +213,7 @@ const Chat = () => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/[0.02] rounded-full blur-[100px] pointer-events-none"></div>
 
       {/* Left Sidebar — Contact List */}
-      <div className={`w-full md:w-80 lg:w-96 border-r border-white/10 flex flex-col bg-black/40 backdrop-blur-xl shrink-0 relative z-10 ${activeChat ? 'hidden md:flex' : 'flex'}`}>
+      <div className={`w-full md:w-80 lg:w-96 border-r border-white/10 flex flex-col bg-[#0b0f19] shadow-xl shrink-0 relative z-10 ${activeChat ? 'hidden md:flex' : 'flex'}`}>
         
         {/* Header */}
         <div className="p-4 border-b border-white/10 flex items-center justify-between shrink-0">
@@ -296,7 +296,7 @@ const Chat = () => {
         {activeChatContact ? (
           <>
             {/* Chat Header */}
-            <div className="p-4 border-b border-white/10 flex items-center justify-between bg-black/40 backdrop-blur-xl shrink-0">
+            <div className="p-4 border-b border-white/10 flex items-center justify-between bg-[#0d121e] shadow-md shrink-0">
               <div className="flex items-center gap-3 min-w-0">
                 <button onClick={() => setActiveChat(null)} className="md:hidden p-1.5 hover:bg-white/10 rounded-full mr-1">
                   <ArrowLeft size={18} />
@@ -340,7 +340,7 @@ const Chat = () => {
             </div>
 
             {/* Message Input Form */}
-            <form onSubmit={handleSendMessage} className="p-3 border-t border-white/10 bg-black/40 backdrop-blur-xl flex items-center gap-2">
+            <form onSubmit={handleSendMessage} className="p-3 border-t border-white/10 bg-[#0d121e] flex items-center gap-2">
               <input
                 type="text"
                 value={msgInput}
@@ -368,8 +368,8 @@ const Chat = () => {
       <AnimatePresence>
         {showNewChat && (
           <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowNewChat(false)} />
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-[#0a0a0d] border border-white/15 rounded-2xl sm:rounded-3xl p-5 sm:p-6 w-[calc(100vw-2rem)] max-w-md relative z-10 shadow-2xl">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/80" onClick={() => setShowNewChat(false)} />
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="glass-panel border border-white/15 rounded-2xl sm:rounded-3xl p-5 sm:p-6 w-[calc(100vw-2rem)] max-w-md relative z-10 shadow-2xl">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-bold text-white">Start New Chat</h2>
                 <button onClick={() => setShowNewChat(false)} className="p-1.5 text-gray-400 hover:text-white rounded-full">

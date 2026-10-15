@@ -13,7 +13,7 @@ export const PrivacyPolicyModal = ({ isOpen, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute inset-0 bg-black/85 backdrop-blur-md"
+        className="absolute inset-0 bg-black/85"
         onClick={onClose}
       />
       <motion.div
@@ -21,7 +21,7 @@ export const PrivacyPolicyModal = ({ isOpen, onClose }) => {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-        className="relative z-10 w-[calc(100vw-2rem)] max-w-2xl bg-[#0a0a0d] border border-white/15 rounded-2xl sm:rounded-3xl p-5 sm:p-8 max-h-[85vh] overflow-y-auto shadow-[0_25px_60px_rgba(0,0,0,0.8)]"
+        className="relative z-10 w-[calc(100vw-2rem)] max-w-2xl glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 max-h-[85vh] overflow-y-auto shadow-2xl"
       >
         <div className="flex items-start justify-between border-b border-white/10 pb-4 mb-6">
           <div className="flex items-center gap-3">

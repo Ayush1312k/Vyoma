@@ -347,7 +347,7 @@ const CompletedProjects = () => {
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }} 
-              className="absolute inset-0 bg-[#0f1117]/65 backdrop-blur-2xl" 
+              className="absolute inset-0 bg-[#070a12]/85" 
               onClick={() => setSelectedProject(null)} 
             />
             <div className="absolute w-[450px] h-[450px] rounded-full blur-[140px] pointer-events-none opacity-35 bg-cyan-500/25" />

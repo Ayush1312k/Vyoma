@@ -29,20 +29,19 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 .glass-panel-legacy {
-  background: rgba(12, 16, 26, 0.93);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  background: #0d111c;
+  background-image: linear-gradient(168deg, #161e31 0%, #0d121f 55%, #080c14 100%);
   border-style: solid;
   border-width: 1.5px 1.5px 2.5px 1.5px;
-  border-top-color: rgba(255, 255, 255, 0.35);
-  border-left-color: rgba(255, 255, 255, 0.2);
-  border-right-color: rgba(0, 0, 0, 0.45);
-  border-bottom-color: rgba(0, 0, 0, 0.75);
+  border-top-color: rgba(255, 255, 255, 0.22);
+  border-left-color: rgba(255, 255, 255, 0.12);
+  border-right-color: rgba(0, 0, 0, 0.55);
+  border-bottom-color: rgba(0, 0, 0, 0.85);
   box-shadow: 
-    0 20px 45px -8px rgba(0, 0, 0, 0.75), 
-    0 8px 18px -4px rgba(0, 0, 0, 0.5),
-    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.22),
-    inset 0 -2.5px 4px rgba(0, 0, 0, 0.55);
+    0 16px 36px -4px rgba(0, 0, 0, 0.85), 
+    0 8px 18px -2px rgba(0, 0, 0, 0.6),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2.5px 4px rgba(0, 0, 0, 0.65);
 }
 .hover-glow:hover {
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
@@ -62,63 +61,83 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-/* TriOptus 3D Frosted Glass Architecture */
+/* ==========================================================================
+   Vyoma 3D Card Architecture (Solid Depth & Physical Elevation)
+   Replaces glassmorphism with tactile, opaque 3D cards
+   ========================================================================== */
 :root {
-  --glass-bg: rgba(12, 16, 26, 0.93);
-  --glass-border-top: rgba(255, 255, 255, 0.35);
-  --glass-border-left: rgba(255, 255, 255, 0.2);
-  --glass-border-right: rgba(0, 0, 0, 0.45);
-  --glass-border-bottom: rgba(0, 0, 0, 0.75);
+  --card-3d-bg: #0c101b;
+  --card-3d-gradient: linear-gradient(168deg, #151e31 0%, #0d121f 55%, #080c15 100%);
+  --card-3d-border-top: rgba(255, 255, 255, 0.24);
+  --card-3d-border-left: rgba(255, 255, 255, 0.12);
+  --card-3d-border-right: rgba(0, 0, 0, 0.55);
+  --card-3d-border-bottom: rgba(0, 0, 0, 0.9);
+  --card-3d-shadow: 
+    0 18px 40px -6px rgba(0, 0, 0, 0.85),
+    0 8px 18px -2px rgba(0, 0, 0, 0.6),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2.5px 4px rgba(0, 0, 0, 0.65);
+  --card-3d-shadow-hover: 
+    0 30px 70px -10px rgba(0, 0, 0, 0.95),
+    0 14px 28px -4px rgba(0, 0, 0, 0.75),
+    0 0 30px -4px rgba(14, 165, 233, 0.22),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -2.5px 4px rgba(0, 0, 0, 0.7);
 }
 
+.card-3d,
+.three-d-card,
 .glass-panel {
-  /* Dark floating glass: preserves the product palette while revealing its ambient backdrop. */
-  background: rgba(12, 16, 26, 0.72);
-  background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.035) 42%, rgba(0, 0, 0, 0.3) 100%);
-  backdrop-filter: blur(25px) saturate(155%);
-  -webkit-backdrop-filter: blur(25px) saturate(155%);
+  /* Solid 3D card surface with physically rendered bevels & drop shadows */
+  background: var(--card-3d-bg);
+  background-image: var(--card-3d-gradient);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border-style: solid !important;
   border-width: 1.5px 1.5px 2.5px 1.5px !important;
-  border-top-color: var(--glass-border-top) !important;
-  border-left-color: var(--glass-border-left) !important;
-  border-right-color: var(--glass-border-right) !important;
-  border-bottom-color: var(--glass-border-bottom) !important;
-  box-shadow: 
-    0 20px 50px -10px rgba(0, 0, 0, 0.72),
-    0 8px 20px -5px rgba(0, 0, 0, 0.45),
-    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.26),
-    inset 0 -2.5px 4px rgba(0, 0, 0, 0.45) !important;
+  border-top-color: var(--card-3d-border-top) !important;
+  border-left-color: var(--card-3d-border-left) !important;
+  border-right-color: var(--card-3d-border-right) !important;
+  border-bottom-color: var(--card-3d-border-bottom) !important;
+  box-shadow: var(--card-3d-shadow) !important;
   position: relative;
   overflow: hidden;
   transform: translateZ(0); /* Hardware acceleration */
-  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.35s ease, background 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), 
+              box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1), 
+              border-color 0.35s ease, 
+              background 0.35s ease;
 }
 
-.glass-panel:hover {
-  background: rgba(15, 20, 32, 0.8);
-  background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.055) 42%, rgba(0, 0, 0, 0.28) 100%);
+.glass-panel:hover,
+.card-3d:hover,
+.three-d-card:hover {
+  background: #0f1423;
+  background-image: linear-gradient(168deg, #1b263e 0%, #101626 55%, #0a0e19 100%);
   transform: translateY(-6px) translateZ(0);
-  border-top-color: rgba(255, 255, 255, 0.62) !important;
-  border-left-color: rgba(255, 255, 255, 0.34) !important;
-  border-right-color: rgba(0, 0, 0, 0.55) !important;
-  border-bottom-color: rgba(0, 0, 0, 0.85) !important;
-  box-shadow: 
-    0 30px 65px -14px rgba(0, 0, 0, 0.85),
-    0 12px 26px -5px rgba(0, 0, 0, 0.58),
-    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.36),
-    inset 0 -2.5px 4px rgba(0, 0, 0, 0.56) !important;
+  border-top-color: rgba(56, 189, 248, 0.6) !important;
+  border-left-color: rgba(255, 255, 255, 0.22) !important;
+  border-right-color: rgba(0, 0, 0, 0.65) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.95) !important;
+  box-shadow: var(--card-3d-shadow-hover) !important;
 }
 
-.glass-panel::after {
+.glass-panel::after,
+.card-3d::after,
+.three-d-card::after {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 4%;
+  right: 4%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), rgba(56, 189, 248, 0.35), rgba(255, 255, 255, 0.25), transparent);
   pointer-events: none;
-  border-radius: inherit;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.15), transparent 26%, transparent 74%, rgba(255, 255, 255, 0.035));
 }
 
-.glass-panel > * {
+.glass-panel > *,
+.card-3d > *,
+.three-d-card > * {
   position: relative;
   z-index: 1;
 }
@@ -195,65 +214,69 @@ body {
   100% { transform: translate3d(8%, 8%, 0) scale(1.1) rotate(5deg); }
 }
 
-/* 3D Frosted Glass Pill Menu — Direct TriOptus Frosted Glass Copy */
+/* 3D Tactile Pill Menu */
+.pill-3d,
 .glass-pill {
-  background: rgba(255, 255, 255, 0.12);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 100%);
-  backdrop-filter: blur(25px) saturate(190%);
-  -webkit-backdrop-filter: blur(25px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-top: 1.5px solid rgba(255, 255, 255, 0.8);
-  border-left: 1.5px solid rgba(255, 255, 255, 0.6);
-  border-right: 1px solid rgba(255, 255, 255, 0.22);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+  background: #141b2a;
+  background-image: linear-gradient(180deg, #1e283d 0%, #111726 100%);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-left: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-right: 1px solid rgba(0, 0, 0, 0.45);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.75);
   border-radius: 50px;
   box-shadow: 
-    0 10px 25px rgba(0, 0, 0, 0.25),
-    0 4px 10px rgba(0, 0, 0, 0.12),
-    inset 0 2px 3px rgba(255, 255, 255, 0.65),
-    inset 0 -2px 3px rgba(0, 0, 0, 0.25);
-  color: #f1f5f9;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #e2e8f0;
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
   position: relative;
   text-decoration: none;
 }
 
-.glass-pill:hover {
-  background: rgba(255, 255, 255, 0.22);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.1) 100%);
-  border-top-color: #ffffff;
-  border-left-color: rgba(255, 255, 255, 0.85);
-  border-right-color: rgba(0, 0, 0, 0.3);
-  border-bottom-color: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
+.glass-pill:hover,
+.pill-3d:hover {
+  background: #192336;
+  background-image: linear-gradient(180deg, #25334d 0%, #151f31 100%);
+  border-top-color: #38bdf8;
+  border-left-color: rgba(56, 189, 248, 0.5);
+  border-right-color: rgba(0, 0, 0, 0.55);
+  border-bottom-color: rgba(0, 0, 0, 0.9);
+  color: #38bdf8;
   box-shadow: 
-    0 16px 36px rgba(0, 0, 0, 0.4),
-    inset 0 2px 4px rgba(255, 255, 255, 0.95);
-  transform: translateY(-2px) scale(1.03);
+    0 8px 20px rgba(0, 0, 0, 0.65),
+    0 0 14px rgba(56, 189, 248, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
-.glass-pill:active {
-  transform: translateY(1px) scale(0.99);
+.glass-pill:active,
+.pill-3d:active {
+  transform: translateY(1px);
+  border-bottom-width: 1px;
   box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    inset 0 1px 2px rgba(0, 0, 0, 0.3);
+    0 2px 6px rgba(0, 0, 0, 0.6),
+    inset 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
+.pill-3d-active,
 .glass-pill-active {
-  background: rgba(255, 255, 255, 0.26);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.15) 100%);
-  backdrop-filter: blur(25px) saturate(190%);
-  -webkit-backdrop-filter: blur(25px) saturate(190%);
-  border-top: 1.5px solid #ffffff;
-  border-left: 1.5px solid rgba(255, 255, 255, 0.9);
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  background: #0284c7;
+  background-image: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-top: 1.5px solid #7dd3fc;
+  border-left: 1.5px solid #38bdf8;
+  border-right: 1px solid rgba(0, 0, 0, 0.35);
+  border-bottom: 2px solid #075985;
   border-radius: 50px;
   color: #ffffff;
   box-shadow: 
-    0 14px 32px rgba(0, 0, 0, 0.4),
-    inset 0 2px 4px rgba(255, 255, 255, 0.95);
+    0 6px 18px rgba(2, 132, 199, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transform: translateY(-1px);
 }
 
@@ -280,9 +303,9 @@ body {
   flex-shrink: 0;
 }
 
-/* ===== APPLE LIQUID GLASS FLOATING DYNAMIC ISLAND & PILLS ===== */
+/* ===== 3D FLOATING DOCK NAVIGATION BAR ===== */
 .apple-nav-font {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "Inter", system-ui, -apple-system, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -290,42 +313,34 @@ body {
 .apple-liquid-nav,
 .trioptus-nav-bar {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "Inter", system-ui, sans-serif;
-  background: linear-gradient(
-    135deg, 
-    rgba(255, 255, 255, 0.76) 0%, 
-    rgba(240, 249, 255, 0.68) 50%, 
-    rgba(224, 242, 254, 0.74) 100%
-  );
-  backdrop-filter: blur(36px) saturate(210%) contrast(102%);
-  -webkit-backdrop-filter: blur(36px) saturate(210%) contrast(102%);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  border-top: 1.5px solid rgba(255, 255, 255, 0.98);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: #0d121e;
+  background-image: linear-gradient(180deg, #151c2d 0%, #0b0f19 100%);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-bottom: 2.5px solid rgba(0, 0, 0, 0.85);
   border-radius: 9999px;
   box-shadow: 
-    0 20px 48px -10px rgba(0, 0, 0, 0.12),
-    0 6px 18px -4px rgba(0, 0, 0, 0.06),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.03);
+    0 20px 45px -8px rgba(0, 0, 0, 0.85),
+    0 6px 16px -3px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.5);
   transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
   -webkit-font-smoothing: antialiased;
 }
 
 .apple-liquid-nav.scrolled,
 .trioptus-nav-bar.scrolled {
-  background: linear-gradient(
-    135deg, 
-    rgba(255, 255, 255, 0.9) 0%, 
-    rgba(240, 249, 255, 0.84) 50%, 
-    rgba(224, 242, 254, 0.88) 100%
-  );
+  background: #101625;
+  background-image: linear-gradient(180deg, #182236 0%, #0e1320 100%);
   box-shadow: 
-    0 24px 56px -10px rgba(0, 0, 0, 0.16),
-    0 8px 22px -4px rgba(0, 0, 0, 0.08),
-    inset 0 1.5px 2px #ffffff;
+    0 26px 56px -10px rgba(0, 0, 0, 0.95),
+    0 8px 20px -4px rgba(0, 0, 0, 0.7),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.22);
 }
 
-/* Apple Liquid Glass Menu Pill — Each Menu Item as an Apple Fluid Capsule */
+/* 3D Nav Capsule Buttons */
 .apple-liquid-pill,
 .trioptus-nav-item {
   position: relative;
@@ -339,17 +354,18 @@ body {
   font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: -0.012em;
-  color: #334155;
+  color: #cbd5e1;
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  border-top: 1.5px solid rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: #141a28;
+  background-image: linear-gradient(180deg, #1c2538 0%, #111724 100%);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.24);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.7);
   box-shadow: 
-    0 2px 6px -1px rgba(0, 0, 0, 0.05),
-    inset 0 1px 1.5px rgba(255, 255, 255, 0.85);
+    0 3px 8px -1px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
   transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
   white-space: nowrap;
   user-select: none;
@@ -359,36 +375,40 @@ body {
 
 .apple-liquid-pill:hover,
 .trioptus-nav-item:hover {
-  background: rgba(255, 255, 255, 0.85);
-  color: #0f172a;
-  border-color: rgba(255, 255, 255, 0.95);
-  border-top-color: #ffffff;
+  background: #1b2336;
+  background-image: linear-gradient(180deg, #25324b 0%, #161e2e 100%);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+  border-top-color: #38bdf8;
+  border-bottom-color: rgba(0, 0, 0, 0.85);
   box-shadow: 
-    0 6px 18px -2px rgba(0, 0, 0, 0.08),
-    0 2px 6px -1px rgba(0, 0, 0, 0.04),
-    inset 0 1.5px 2px #ffffff;
+    0 6px 16px -2px rgba(0, 0, 0, 0.65),
+    0 0 12px rgba(56, 189, 248, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
 }
 
 .apple-liquid-pill:active,
 .trioptus-nav-item:active {
-  transform: scale(0.97) translateY(0);
+  transform: scale(0.97) translateY(1px);
+  border-bottom-width: 1px;
   box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    0 1px 4px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .apple-liquid-pill.active,
 .trioptus-nav-item.active {
-  background: linear-gradient(135deg, #ffffff 0%, rgba(240, 249, 255, 0.95) 100%);
-  color: #0284c7;
+  background: #0284c7;
+  background-image: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
   font-weight: 600;
-  border: 1px solid #ffffff;
-  border-top: 1.5px solid #ffffff;
+  border: 1px solid #38bdf8;
+  border-top: 1.5px solid #7dd3fc;
+  border-bottom: 2px solid #075985;
   box-shadow: 
-    0 4px 14px -1px rgba(2, 132, 199, 0.2),
-    0 2px 6px -1px rgba(0, 0, 0, 0.06),
-    inset 0 1.5px 2px #ffffff;
+    0 4px 14px -1px rgba(2, 132, 199, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transform: translateY(-0.5px);
 }
 
@@ -398,12 +418,12 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0284c7;
+  background: #7dd3fc;
   margin-left: 2px;
-  box-shadow: 0 0 6px rgba(2, 132, 199, 0.8);
+  box-shadow: 0 0 6px #7dd3fc;
 }
 
-/* 3D Apple Liquid White Capsule Buttons */
+/* 3D Elevated White Capsule Button */
 .btn-nav-white {
   position: relative;
   display: inline-flex;
@@ -414,20 +434,20 @@ body {
   border-radius: 9999px;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "Inter", system-ui, sans-serif;
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.012em;
   color: #0f172a;
   text-decoration: none;
-  background: linear-gradient(135deg, #ffffff 0%, rgba(248, 250, 252, 0.92) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: #ffffff;
+  background-image: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #cbd5e1;
   border-top: 1.5px solid #ffffff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 2.5px solid #94a3b8;
   box-shadow: 
-    0 3px 8px -1px rgba(0, 0, 0, 0.06), 
-    inset 0 1.5px 2px #ffffff,
-    inset 0 -1px 2px rgba(0, 0, 0, 0.03);
+    0 4px 12px rgba(0, 0, 0, 0.4), 
+    inset 0 1px 0 #ffffff;
   transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
   cursor: pointer;
   white-space: nowrap;
@@ -435,58 +455,68 @@ body {
 }
 
 .btn-nav-white:hover {
-  transform: translateY(-1px);
+  transform: translateY(-1.5px);
   box-shadow: 
-    0 8px 20px -2px rgba(2, 132, 199, 0.16), 
-    inset 0 1.5px 2px #ffffff;
+    0 8px 20px rgba(0, 0, 0, 0.5), 
+    0 0 16px rgba(255, 255, 255, 0.4),
+    inset 0 1px 0 #ffffff;
   color: #0284c7;
 }
 
 .btn-nav-white:active {
-  transform: scale(0.97) translateY(0);
+  transform: scale(0.97) translateY(1px);
+  border-bottom-width: 1.5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* Glass Button — 3D Frosted Capsule Style */
+/* 3D Tactile Push Button */
+.btn-3d,
 .glass-btn {
-  background: rgba(255, 255, 255, 0.12);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
-  backdrop-filter: blur(20px) saturate(170%);
-  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  background: #141a28;
+  background-image: linear-gradient(180deg, #1e273b 0%, #111724 100%);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border-style: solid;
-  border-width: 1.5px 1.5px 2px 1.5px;
-  border-top-color: rgba(255, 255, 255, 0.75);
-  border-left-color: rgba(255, 255, 255, 0.5);
-  border-right-color: rgba(0, 0, 0, 0.35);
-  border-bottom-color: rgba(0, 0, 0, 0.55);
+  border-width: 1.5px 1.5px 3px 1.5px;
+  border-top-color: rgba(255, 255, 255, 0.3);
+  border-left-color: rgba(255, 255, 255, 0.15);
+  border-right-color: rgba(0, 0, 0, 0.5);
+  border-bottom-color: rgba(0, 0, 0, 0.85);
   border-radius: 9999px;
   box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.35), 
-    0 3px 8px rgba(0, 0, 0, 0.2),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.5),
-    inset 0 -1.5px 2px rgba(0, 0, 0, 0.3);
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    0 8px 20px -3px rgba(0, 0, 0, 0.7), 
+    0 3px 8px -1px rgba(0, 0, 0, 0.5),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.5);
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
   color: white;
   position: relative;
   overflow: hidden;
 }
 
+.btn-3d:hover,
 .glass-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.08) 100%);
-  border-top-color: #ffffff;
-  border-left-color: rgba(255, 255, 255, 0.75);
-  border-right-color: rgba(0, 0, 0, 0.45);
-  border-bottom-color: rgba(0, 0, 0, 0.7);
+  background: #192134;
+  background-image: linear-gradient(180deg, #27344e 0%, #151d2d 100%);
+  border-top-color: rgba(56, 189, 248, 0.8);
+  border-left-color: rgba(56, 189, 248, 0.4);
+  border-right-color: rgba(0, 0, 0, 0.6);
+  border-bottom-color: rgba(0, 0, 0, 0.95);
   box-shadow: 
-    0 14px 32px rgba(0, 0, 0, 0.5), 
-    0 5px 12px rgba(0, 0, 0, 0.3),
-    inset 0 2px 3px rgba(255, 255, 255, 0.7);
+    0 14px 28px -4px rgba(0, 0, 0, 0.8), 
+    0 0 18px rgba(14, 165, 233, 0.35),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
 }
 
+.btn-3d:active,
 .glass-btn:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(2px);
+  border-bottom-width: 1.5px;
+  box-shadow: 
+    0 3px 8px rgba(0, 0, 0, 0.6), 
+    inset 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* Live Cursor Styles */

@@ -404,12 +404,12 @@ const ProfileCarouselModal = ({ profile, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-      {/* Translucent blurred backdrop with ambient colorful glowing orbs */}
+      {/* Solid deep modal backdrop with ambient colorful glowing orbs */}
       <motion.div 
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         exit={{ opacity: 0 }} 
-        className="absolute inset-0 bg-[#0f1117]/65 backdrop-blur-2xl" 
+        className="absolute inset-0 bg-[#070a12]/85" 
         onClick={onClose} 
       />
       {/* Dynamic ambient color glows behind the modal */}
@@ -419,7 +419,7 @@ const ProfileCarouselModal = ({ profile, onClose }) => {
       <div className="absolute w-[350px] h-[350px] rounded-full blur-[120px] pointer-events-none opacity-30 bg-purple-500/25 -bottom-10 right-1/4" />
 
       <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 md:gap-8 max-w-full">
-        <button onClick={prev} className="hidden sm:flex w-11 h-11 sm:w-12 sm:h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-all shrink-0"><ChevronLeft size={22} /></button>
+        <button onClick={prev} className="hidden sm:flex w-11 h-11 sm:w-12 sm:h-12 bg-[#141a28] border border-white/15 border-t-white/30 border-b-black shadow-[0_4px_12px_rgba(0,0,0,0.6)] rounded-full items-center justify-center text-white hover:bg-cyan-500 hover:text-black hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all shrink-0"><ChevronLeft size={22} /></button>
         <div className="relative w-[calc(100vw-3rem)] max-w-[320px] sm:w-[320px] md:w-[360px] h-[480px] sm:h-[520px]">
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div key={cardIndex} custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 25 }} className="absolute inset-0">
@@ -427,20 +427,20 @@ const ProfileCarouselModal = ({ profile, onClose }) => {
             </motion.div>
           </AnimatePresence>
           <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
-            <button onClick={prev} className="sm:hidden w-8 h-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white" aria-label="Previous card">
+            <button onClick={prev} className="sm:hidden w-8 h-8 bg-[#141a28] border border-white/15 border-t-white/30 border-b-black shadow-[0_4px_12px_rgba(0,0,0,0.6)] rounded-full flex items-center justify-center text-white" aria-label="Previous card">
               <ChevronLeft size={16} />
             </button>
             <div className="flex gap-2">
               {[0,1,2,3].map(i => <div key={i} className={`h-2 rounded-full transition-all ${cardIndex === i ? 'bg-white w-6' : 'bg-white/30 w-2'}`}></div>)}
             </div>
-            <button onClick={next} className="sm:hidden w-8 h-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white" aria-label="Next card">
+            <button onClick={next} className="sm:hidden w-8 h-8 bg-[#141a28] border border-white/15 border-t-white/30 border-b-black shadow-[0_4px_12px_rgba(0,0,0,0.6)] rounded-full flex items-center justify-center text-white" aria-label="Next card">
               <ChevronRight size={16} />
             </button>
           </div>
         </div>
-        <button onClick={next} className="hidden sm:flex w-11 h-11 sm:w-12 sm:h-12 bg-white/5 backdrop-blur-xl border border-white/20 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-all shrink-0"><ChevronRight size={22} /></button>
+        <button onClick={next} className="hidden sm:flex w-11 h-11 sm:w-12 sm:h-12 bg-[#141a28] border border-white/15 border-t-white/30 border-b-black shadow-[0_4px_12px_rgba(0,0,0,0.6)] rounded-full items-center justify-center text-white hover:bg-cyan-500 hover:text-black hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all shrink-0"><ChevronRight size={22} /></button>
       </div>
-      <button onClick={onClose} className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 sm:p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-30 text-gray-400 hover:text-white backdrop-blur-lg border border-white/15"><X size={18} /></button>
+      <button onClick={onClose} className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 sm:p-3 bg-[#141a28] hover:bg-white/20 rounded-full transition-colors z-30 text-gray-300 hover:text-white border border-white/15 shadow-lg"><X size={18} /></button>
     </div>
   );
 };
